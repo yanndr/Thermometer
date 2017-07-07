@@ -12,20 +12,19 @@ namespace ThermometerConsole
             var tempK = new Kelvin(0.0m);
             var zeroC = new Celcius(0m);
 
-            var cc = new CelciusConverter();
-            var kc = new KelvinConverter();
-            var fc = new FahrenheitConverter();
+            var tc = new TemperatureConverter(new ConverterFactory());
 
-            var result = cc.Convert(tempK); 
-            var result2= kc.Convert(zeroC);
+
+            var result = tc.Convert<Celcius>(tempK); 
+            var result2= tc.Convert<Kelvin>(zeroC);
 
 
             // Console.WriteLine(temp.ToString());
             Console.WriteLine(result);
             Console.WriteLine(result2);
 
-            Console.WriteLine(fc.Convert(tempK));
-            Console.WriteLine(fc.Convert(zeroC));
+            Console.WriteLine(tc.Convert<Fahrenheit>(tempK));
+            Console.WriteLine(tc.Convert<Fahrenheit>(zeroC));
 
             // var toKelv = (Kelvin)zeroC;
 

@@ -2,15 +2,8 @@ using System;
 
 namespace TemperatureLibrary.Converter{
     public class FahrenheitConverter: IConverter{
-        public ITemperature Convert(ITemperature temperature){
-            if(temperature is Fahrenheit)
-            {
-             return temperature;
-            }
-
-            var temp = new ConverterFactory().GetConverter(temperature).ToKelvin(temperature);
-
-            return new Fahrenheit(temp.Value* 9/5 -459.67m);
+        public ITemperature FromKelvin(Kelvin temperature){
+            return new Fahrenheit(temperature.Value* 9/5 -459.67m);
         }
 
         public  Kelvin ToKelvin(ITemperature temperature){
