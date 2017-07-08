@@ -16,7 +16,7 @@ namespace ThermometerConsole
             var converters = new List<IUnitConverter>();
             converters.Add(new KelvinConverter()); 
             converters.Add(new FahrenheitConverter()); 
-            converters.Add(new CelciusConverter());
+            converters.Add(new CelsiusConverter());
 
             var tc = new TemperatureConverter(new ConverterFactory(converters));
 

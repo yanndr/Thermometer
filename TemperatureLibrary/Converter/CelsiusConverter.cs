@@ -1,7 +1,7 @@
 using System;
 
 namespace TemperatureLibrary.Converter{
-    public class CelciusConverter: IUnitConverter{
+    public class CelsiusConverter: IUnitConverter{
         public ITemperature FromKelvin(ITemperature temperature)
         {
             return new Temperature(temperature.Value-273.15m,Unit.Celsius);
