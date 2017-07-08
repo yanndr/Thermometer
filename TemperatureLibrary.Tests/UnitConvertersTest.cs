@@ -27,7 +27,7 @@ namespace TemperatureLibrary.Tests
         public void KelvinToCelsuis(decimal input, decimal expectedResult)
         {
             var cc = new CelsiusConverter();
-            var temp = new Temperature(input,Unit.Celsius);
+            var temp = new Temperature(input,Unit.Kelvin);
             var result = cc.FromKelvin(temp);
 
             Assert.Equal<decimal>(expectedResult,Math.Round(result.Value,2));
@@ -40,7 +40,7 @@ namespace TemperatureLibrary.Tests
         public void FahrenheitToKelvin(decimal input, decimal expectedResult)
         {
             var cc = new FahrenheitConverter();
-            var temp = new Temperature(input,Unit.Celsius);
+            var temp = new Temperature(input,Unit.Fahrenheit);
             var result = cc.ToKelvin(temp);
 
             Assert.Equal<decimal>(expectedResult,Math.Round(result.Value,2));
@@ -53,7 +53,7 @@ namespace TemperatureLibrary.Tests
         public void KelvinToCFahreinheit(decimal input, decimal expectedResult)
         {
             var cc = new FahrenheitConverter();
-            var temp = new Temperature(input,Unit.Celsius);
+            var temp = new Temperature(input,Unit.Kelvin);
             var result = cc.FromKelvin(temp);
 
             Assert.Equal<decimal>(expectedResult,Math.Round(result.Value,2));
