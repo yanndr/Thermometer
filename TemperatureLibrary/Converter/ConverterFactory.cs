@@ -1,42 +1,33 @@
 using System;
+using System.Collections.Generic;
 
 namespace TemperatureLibrary.Converter
 {
     public interface IConverterFactory
     {
-        IConverter GetConverter(ITemperature temperature);
-        IConverter GetConverter(Type temperatureType);
+        ICollection<IUnitConverter> Converters {get;}
+        IUnitConverter GetConverter(Unit unit);
     }
 
     public class ConverterFactory:IConverterFactory
     {
-        public IConverter GetConverter(ITemperature temperature)
+        public ICollection<IUnitConverter> Converters {get; set;}
+
+        public ConverterFactory(ICollection<IUnitConverter> converters){
+            Converters = converters;
+        }
+        public IUnitConverter GetConverter(Unit unit)
         {
             
-            if(temperature is Celcius)
+            foreach (var converter in Converters)
             {
-                return new CelciusConverter();
+                if (converter.IsApplicableToUnit(unit)){
+                    return converter;
+                }
             }
-            else if(temperature is FahrenheitConverter)
-            {
-                return new FahrenheitConverter();
-            }
-            
-            return new KelvinConverter();
+
+            return null;
         }
 
-        public IConverter GetConverter(Type temperatureType)
-        {
-            if (temperatureType == typeof(Celcius))
-            {
-                return new CelciusConverter();
-            }
-            else if(temperatureType == typeof(Fahrenheit)) 
-            {
-                return new FahrenheitConverter();
-            }
-            
-            return new KelvinConverter();
-        }
     }
 }

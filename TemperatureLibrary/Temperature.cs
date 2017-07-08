@@ -2,22 +2,21 @@ using System;
 
 namespace TemperatureLibrary
 {
-    public abstract class TemperatureBase: ITemperature
+    public class Temperature :ITemperature
     {
-        public virtual decimal Value {get; set;}
-        protected string Symbole {get; set;}
-        
-        protected TemperatureBase(string symbole){
-            Value=0.0m;
-            Symbole = symbole;
+        public  decimal Value {get; set;}
+        public Unit Unit {get; set;}
+
+        public Temperature(decimal value,Unit unit){
+            Value = value;
+            Unit = unit;
         }
 
-
         public override string ToString(){
-            return string.Format("{0}°{1}",Value,Symbole);
+            return string.Format("{0}°{1}",Value,((char)Unit).ToString());
         } 
 
-        public static bool operator ==(TemperatureBase a, TemperatureBase b)
+        public static bool operator ==(Temperature a, Temperature b)
         {
             if (System.Object.ReferenceEquals(a, b))
             {
@@ -32,14 +31,14 @@ namespace TemperatureLibrary
             return a.Value == b.Value;
         }
 
-        public static bool operator !=(TemperatureBase a, TemperatureBase b)
+        public static bool operator !=(Temperature a, Temperature b)
         {
             return !(a == b);
         }
 
         public override bool Equals(System.Object obj)
         {
-            TemperatureBase p = obj as TemperatureBase;
+            Temperature p = obj as Temperature;
             if ((object)p == null)
             {
                 return false;

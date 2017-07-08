@@ -1,13 +1,18 @@
 using System;
 
 namespace TemperatureLibrary.Converter{
-    public class KelvinConverter: IConverter{
-        public ITemperature FromKelvin(Kelvin temperature){
+    public class KelvinConverter: IUnitConverter{
+        public ITemperature FromKelvin(ITemperature temperature){
             return temperature;
         }
 
-        public  Kelvin ToKelvin(ITemperature temperature){
-            return temperature as Kelvin;
+        public  ITemperature ToKelvin(ITemperature temperature){
+            return temperature;
         }
+
+        public bool IsApplicableToUnit(Unit unit)
+         {
+            return unit == Unit.Kelvin;
+         }
     }
 }

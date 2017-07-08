@@ -1,15 +1,20 @@
 using System;
 
 namespace TemperatureLibrary.Converter{
-    public class CelciusConverter: IConverter{
-        public ITemperature FromKelvin(Kelvin temperature)
+    public class CelciusConverter: IUnitConverter{
+        public ITemperature FromKelvin(ITemperature temperature)
         {
-            return new Celcius(temperature.Value-273.15m);
+            return new Temperature(temperature.Value-273.15m,Unit.Celsius);
         }
 
-        public  Kelvin ToKelvin(ITemperature temperature)
+        public  ITemperature ToKelvin(ITemperature temperature)
         {
-            return new Kelvin(temperature.Value+273.15m);
+            return new Temperature(temperature.Value+273.15m,Unit.Celsius);
         }
+
+         public bool IsApplicableToUnit(Unit unit)
+         {
+            return unit == Unit.Celsius;
+         }
     }
 }
