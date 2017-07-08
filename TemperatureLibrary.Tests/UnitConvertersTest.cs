@@ -5,7 +5,7 @@ using TemperatureLibrary.Converter;
 
 namespace TemperatureLibrary.Tests
 {
-    public class ConverterTest
+    public class UnitConverterTest
     {
         [Theory]
         [InlineData(0,273.15)]
