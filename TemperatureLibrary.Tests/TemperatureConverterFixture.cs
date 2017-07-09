@@ -19,7 +19,6 @@ namespace TemperatureLibrary.Tests
             temperatureConverter = new TemperatureConverter(new ConverterFactory(converters));
         }
 
-
         [Theory]
         [InlineData(0,273.15)]
         [InlineData(60,333.15)]
@@ -40,6 +39,30 @@ namespace TemperatureLibrary.Tests
         {
             var temp = new Temperature(input,Unit.Celsius);
             var result = temperatureConverter.Convert(temp,Unit.Fahrenheit);
+
+            Assert.Equal<decimal>(expectedResult,Math.Round(result.Value,2));
+        }
+
+        [Theory]
+        [InlineData(32,0)]
+        [InlineData(140,60)]
+        [InlineData(77,25)]
+        public void FahrenheitToCelsius(decimal input, decimal expectedResult)
+        {
+            var temp = new Temperature(input,Unit.Fahrenheit);
+            var result = temperatureConverter.Convert(temp,Unit.Celsius);
+
+            Assert.Equal<decimal>(expectedResult,Math.Round(result.Value,2));
+        }
+
+        [Theory]
+        [InlineData(0,255.37)]
+        [InlineData(60,288.71)]
+        [InlineData(25,269.26)]
+        public void FahrenheitToKelvin(decimal input, decimal expectedResult)
+        {
+            var temp = new Temperature(input,Unit.Fahrenheit);
+            var result = temperatureConverter.Convert(temp,Unit.Kelvin);
 
             Assert.Equal<decimal>(expectedResult,Math.Round(result.Value,2));
         }

@@ -28,7 +28,7 @@ namespace TemperatureLibrary
                 return false;
             }
 
-            return a.Value == b.Value;
+            return a.Value == b.Value && a.Unit == b.Unit;
         }
 
         public static bool operator !=(Temperature a, Temperature b)
