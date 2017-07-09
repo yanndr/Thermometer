@@ -24,6 +24,8 @@ Run the api with dotnet:
 
 
 Run the api with Docker:
+- build the image:
 > docker build -t converter-api .
 
+- Run the container
 > docker run -it --rm converter-api
