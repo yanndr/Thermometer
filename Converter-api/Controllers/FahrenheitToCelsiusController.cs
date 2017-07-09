@@ -12,7 +12,6 @@ namespace Converter_api.Controllers
     public class FahrenheitToCelsiusController : Controller
     {
         
-        // GET api/values/5
         [HttpGet("{value}")]
         public decimal Get(decimal value)
         {
