@@ -13,10 +13,18 @@ namespace Converter_api.Controllers
     {
         
         [HttpGet("{value}")]
-        public decimal Get(decimal value)
+        public IActionResult Get(decimal value)
         {
             var temp = new Temperature(value,Unit.Fahrenheit);
-            return Math.Round(Converter.Instance.Convert(temp,Unit.Celsius).Value,2);
+            
+            ITemperature convertedTemp;
+            try{
+                convertedTemp = Converter.Instance.Convert(temp,Unit.Celsius); 
+            }
+            catch(Exception e){
+                return StatusCode(500,e.Message);
+            }
+            return new ObjectResult(Math.Round(convertedTemp.Value,2));
         }
     }
 }
