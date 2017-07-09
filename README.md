@@ -1,16 +1,30 @@
 # Introduction
-This is a 
+This is an implementation of a temperature unit converter (so far) in C#.
 
-# Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
+# Prerequistes
+- .net Core or Docker
 
 # Build and Test
-dotnet build ./Thermometer.sln
+...
+> dotnet restore
+> dotnet build 
+...
 
-dotnet test ./TemperatureLibrary.Tests
+Tests:
+...
+> dotnet test ./TemperatureLibrary.Tests
+...
 
+# Run the Converter-api
 
+...
+> cd Converter-api
+> dotnet run -p Converter-api.csproj 
+...
+
+or with Docker:
+ 
+...
+> docker build -t converter-api .
+> docker run -it --rm converter-api
+...
