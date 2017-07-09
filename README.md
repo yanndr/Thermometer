@@ -7,6 +7,7 @@ This is an implementation of a temperature unit converter (so far) in C#.
 # Build and Test
 Build the solution:
 > dotnet restore
+
 > dotnet build 
 
 
@@ -18,9 +19,13 @@ Run the tests:
 
 Run the api with dotnet:
 > cd Converter-api
+
 > dotnet run -p Converter-api.csproj 
 
 
 Run the api with Docker:
+- build the image:
 > docker build -t converter-api .
+
+- Run the container
 > docker run -it --rm converter-api
