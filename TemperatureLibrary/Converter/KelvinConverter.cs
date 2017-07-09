@@ -1,6 +1,5 @@
-using System;
-
-namespace TemperatureLibrary.Converter{
+namespace TemperatureLibrary.Converter
+{
     public class KelvinConverter: IUnitConverter{
         public ITemperature FromKelvin(ITemperature temperature){
             return temperature;

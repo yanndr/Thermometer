@@ -1,5 +1,3 @@
-using System;
-
 namespace TemperatureLibrary
 {
     public interface ITemperature
