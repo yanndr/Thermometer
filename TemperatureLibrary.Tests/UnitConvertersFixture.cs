@@ -1,6 +1,5 @@
 using System;
 using Xunit;
-using TemperatureLibrary;
 using TemperatureLibrary.Converter;
 
 namespace TemperatureLibrary.Tests
@@ -17,7 +16,7 @@ namespace TemperatureLibrary.Tests
             var temp = new Temperature(input,Unit.Celsius);
             var result = cc.ToKelvin(temp);
 
-            Assert.Equal<decimal>(expectedResult,Math.Round(result.Value,2));
+            Assert.Equal(expectedResult,Math.Round(result.Value,2));
         }
 
         [Theory]
@@ -30,7 +29,7 @@ namespace TemperatureLibrary.Tests
             var temp = new Temperature(input,Unit.Kelvin);
             var result = cc.FromKelvin(temp);
 
-            Assert.Equal<decimal>(expectedResult,Math.Round(result.Value,2));
+            Assert.Equal(expectedResult,Math.Round(result.Value,2));
         }
 
         [Theory]
@@ -43,7 +42,7 @@ namespace TemperatureLibrary.Tests
             var temp = new Temperature(input,Unit.Fahrenheit);
             var result = cc.ToKelvin(temp);
 
-            Assert.Equal<decimal>(expectedResult,Math.Round(result.Value,2));
+            Assert.Equal(expectedResult,Math.Round(result.Value,2));
         }
 
         [Theory]
@@ -56,7 +55,7 @@ namespace TemperatureLibrary.Tests
             var temp = new Temperature(input,Unit.Kelvin);
             var result = cc.FromKelvin(temp);
 
-            Assert.Equal<decimal>(expectedResult,Math.Round(result.Value,2));
+            Assert.Equal(expectedResult,Math.Round(result.Value,2));
         }
     }
 }

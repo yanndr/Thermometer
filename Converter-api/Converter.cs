@@ -29,7 +29,6 @@ namespace Converter_api
                                 (
                                     new List<IUnitConverter>
                                     {
-                                        new KelvinConverter(),
                                         new CelsiusConverter(),
                                         new FahrenheitConverter()
                                     }

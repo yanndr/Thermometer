@@ -11,7 +11,6 @@ namespace TemperatureLibrary.Tests
         TemperatureConverter temperatureConverter;
         public TemperatureConverterFixture(){
             var converters = new List<IUnitConverter>();
-            converters.Add(new KelvinConverter()); 
             converters.Add(new FahrenheitConverter()); 
             converters.Add(new CelsiusConverter());
 
@@ -27,7 +26,7 @@ namespace TemperatureLibrary.Tests
             var temp = new Temperature(input,Unit.Celsius);
             var result = temperatureConverter.Convert(temp,Unit.Kelvin);
 
-            Assert.Equal<decimal>(expectedResult,Math.Round(result.Value,2));
+            Assert.Equal(expectedResult,Math.Round(result.Value,2));
         }
 
         [Theory]

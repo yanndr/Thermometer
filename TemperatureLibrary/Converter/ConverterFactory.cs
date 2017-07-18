@@ -12,7 +12,7 @@ namespace TemperatureLibrary.Converter
         }
         public IUnitConverter GetConverter(Unit unit)
         {
-            return Converters.FirstOrDefault(Converter => Converter.IsApplicableToUnit(unit));
+            return Converters.FirstOrDefault(converter => converter.IsApplicableToUnit(unit));
         }
 
     }

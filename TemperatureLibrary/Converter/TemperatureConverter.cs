@@ -9,7 +9,7 @@ namespace TemperatureLibrary.Converter
 
     public class TemperatureConverter:ITemperatureConverter
     {
-        private IConverterFactory converterFactory;
+        private readonly IConverterFactory converterFactory;
 
         public TemperatureConverter(IConverterFactory converterFactory)
         {
@@ -28,8 +28,16 @@ namespace TemperatureLibrary.Converter
                 return temperature;
             }
 
+           
+
             var fromConverter = GetConverter(temperature.Unit);
             var tempInKelvin = fromConverter.ToKelvin(temperature);
+
+            if (unit == Unit.Kelvin)
+            {
+                return tempInKelvin;
+            }
+
             var toConverter = GetConverter(unit);
 
             return toConverter.FromKelvin(tempInKelvin);
