@@ -7,8 +7,8 @@ namespace TemperatureLibrary
 {
     public class Thermometer
     {
-        private ICollection<IAlerter> alerters;
-        public ITemperatureConverter converter;
+        private readonly ICollection<IAlerter> alerters;
+        private readonly ITemperatureConverter converter;
 
         public event EventHandler<TemperatureAlertEventArgs> AlertEventHandler;
 
@@ -20,11 +20,14 @@ namespace TemperatureLibrary
         /// </summary>
         public decimal Fluctuation { get; protected set; }
 
-        public Thermometer(Unit unit, ITemperatureConverter converter)
+        private Thermometer() { }
+
+        public Thermometer(Unit unit, ITemperatureConverter converter, ICollection<IAlerter> alerters)
         {
             ThermometerUnit = unit;
             Temperature = new Temperature(0.0m,unit);
             this.converter = converter;
+            this.alerters = alerters;
         }
 
         public virtual void HandleTemperatureChanged(object sender, TemperatureChangedEventArgs e)
