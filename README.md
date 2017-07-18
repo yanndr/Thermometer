@@ -5,26 +5,27 @@ This is an implementation of a temperature unit converter (so far) in C#.
 - .net Core or Docker
 
 # Build and Test
-...
+Build the solution:
 > dotnet restore
-> dotnet build 
-...
 
-Tests:
-...
+> dotnet build 
+
+
+Run the tests:
 > dotnet test ./TemperatureLibrary.Tests
-...
+
 
 # Run the Converter-api
 
-...
+Run the api with dotnet:
 > cd Converter-api
-> dotnet run -p Converter-api.csproj 
-...
 
-or with Docker:
- 
-...
+> dotnet run -p Converter-api.csproj 
+
+
+Run the api with Docker:
+- build the image:
 > docker build -t converter-api .
+
+- Run the container
 > docker run -it --rm converter-api
-...
