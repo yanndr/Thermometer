@@ -7,12 +7,11 @@ namespace TemperatureLibrary.Tests
 {
     public class TemperatureConverterFixture
     {
+        readonly TemperatureConverter temperatureConverter;
 
-        TemperatureConverter temperatureConverter;
         public TemperatureConverterFixture(){
-            var converters = new List<IUnitConverter>();
-            converters.Add(new FahrenheitConverter()); 
-            converters.Add(new CelsiusConverter());
+            var converters = new List<IUnitConverter> {new FahrenheitConverter(), new CelsiusConverter()};
+
 
             temperatureConverter = new TemperatureConverter(new ConverterFactory(converters));
         }

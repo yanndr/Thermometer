@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Xml;
 
 namespace TemperatureLibrary.Alerters
 {
     public interface IAlerter
     {
         string Name { get; set; }
-        bool IsConditionReached(ITemperature tempererature, decimal fluctuation);
+        bool IsConditionReached(decimal tempererature, decimal fluctuation);
     }
 
     /// <summary>
@@ -17,7 +16,7 @@ namespace TemperatureLibrary.Alerters
         /// <summary>
         /// The name of the alert issued.
         /// </summary>
-        public string AlertName { get; private set; }
+        public string AlertName { get; }
 
         /// <summary>
         /// Constructor.

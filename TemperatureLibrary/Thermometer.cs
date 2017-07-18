@@ -50,7 +50,7 @@ namespace TemperatureLibrary
 
             foreach (var alert in alerters)
             {
-                if (alert.IsConditionReached(Temperature, Fluctuation))
+                if (alert.IsConditionReached(Temperature.Value, Fluctuation))
                 {
                     OnRaiseTemperatureAlertEvent(new TemperatureAlertEventArgs(alert.Name));
                 }

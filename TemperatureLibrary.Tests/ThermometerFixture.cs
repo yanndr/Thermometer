@@ -76,7 +76,7 @@ namespace TemperatureLibrary.Tests
         {
             var alert = new Mock<IAlerter> {Name = "test"};
 
-            alert.Setup(x => x.IsConditionReached(It.IsAny<ITemperature>(), It.IsAny<decimal>())).Returns(raiseAlert);
+            alert.Setup(x => x.IsConditionReached(It.IsAny<decimal>(), It.IsAny<decimal>())).Returns(raiseAlert);
             var alertList = new List<IAlerter>
             {
                 alert.Object
