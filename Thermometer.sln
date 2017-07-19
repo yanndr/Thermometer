@@ -6,9 +6,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TemperatureLibrary", "Tempe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TemperatureLibrary.Tests", "TemperatureLibrary.Tests\TemperatureLibrary.Tests.csproj", "{E3ED4CBD-7CE4-4411-90E9-424AE6EE6217}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Converter-api", "Converter-api\Converter-api.csproj", "{6EA061D1-604F-40D4-A411-0945F3DC7EC0}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThermometerConsole", "ThermometerConsole\ThermometerConsole.csproj", "{F032416E-C606-45DC-AAD2-B44AAFCD9B74}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThermometerConsole", "ThermometerConsole\ThermometerConsole.csproj", "{F032416E-C606-45DC-AAD2-B44AAFCD9B74}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -44,18 +42,6 @@ Global
 		{E3ED4CBD-7CE4-4411-90E9-424AE6EE6217}.Release|x64.Build.0 = Release|Any CPU
 		{E3ED4CBD-7CE4-4411-90E9-424AE6EE6217}.Release|x86.ActiveCfg = Release|Any CPU
 		{E3ED4CBD-7CE4-4411-90E9-424AE6EE6217}.Release|x86.Build.0 = Release|Any CPU
-		{6EA061D1-604F-40D4-A411-0945F3DC7EC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6EA061D1-604F-40D4-A411-0945F3DC7EC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6EA061D1-604F-40D4-A411-0945F3DC7EC0}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{6EA061D1-604F-40D4-A411-0945F3DC7EC0}.Debug|x64.Build.0 = Debug|Any CPU
-		{6EA061D1-604F-40D4-A411-0945F3DC7EC0}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{6EA061D1-604F-40D4-A411-0945F3DC7EC0}.Debug|x86.Build.0 = Debug|Any CPU
-		{6EA061D1-604F-40D4-A411-0945F3DC7EC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6EA061D1-604F-40D4-A411-0945F3DC7EC0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6EA061D1-604F-40D4-A411-0945F3DC7EC0}.Release|x64.ActiveCfg = Release|Any CPU
-		{6EA061D1-604F-40D4-A411-0945F3DC7EC0}.Release|x64.Build.0 = Release|Any CPU
-		{6EA061D1-604F-40D4-A411-0945F3DC7EC0}.Release|x86.ActiveCfg = Release|Any CPU
-		{6EA061D1-604F-40D4-A411-0945F3DC7EC0}.Release|x86.Build.0 = Release|Any CPU
 		{F032416E-C606-45DC-AAD2-B44AAFCD9B74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F032416E-C606-45DC-AAD2-B44AAFCD9B74}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F032416E-C606-45DC-AAD2-B44AAFCD9B74}.Debug|x64.ActiveCfg = Debug|Any CPU
