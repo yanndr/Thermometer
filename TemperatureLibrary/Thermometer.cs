@@ -9,11 +9,6 @@ namespace TemperatureLibrary
         public Unit ThermometerUnit { get; set; }
         public ITemperature Temperature { get; private set; }
 
-        /// <summary>
-        /// The fluctuation of the temperature since the last update.
-        /// </summary>
-        public decimal Fluctuation { get; protected set; }
-
         protected Thermometer() { }
 
         public Thermometer(Unit unit)
@@ -23,7 +18,6 @@ namespace TemperatureLibrary
         }
 
         protected void updateTemperature(ITemperature temperature){
-            Fluctuation = temperature.Value - Temperature.Value;
             Temperature = temperature;
         }
 
@@ -46,9 +40,9 @@ namespace TemperatureLibrary
         /// <summary>
         /// The value of the temperature change.
         /// </summary>
-        public Temperature Temperature { get; }
+        public ITemperature Temperature { get; }
 
-        public TemperatureChangedEventArgs(Temperature temperature)
+        public TemperatureChangedEventArgs(ITemperature temperature)
         {
             Temperature = temperature;
         }

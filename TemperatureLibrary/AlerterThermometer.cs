@@ -9,7 +9,6 @@ namespace TemperatureLibrary
     public class AlerterThermometer: MultiUnitThermometer, IAlerterThermometer
     {
          public  ICollection<IAlerter> Alerters {get;}
-         public event EventHandler<TemperatureAlertEventArgs> AlertEventHandler;
 
         public AlerterThermometer(Unit unit, ITemperatureConverter converter,ICollection<IAlerter> alerters):base(unit,converter)
         {
@@ -25,16 +24,8 @@ namespace TemperatureLibrary
 
             foreach (var alert in Alerters)
             {
-                if (alert.IsConditionReached(Temperature.Value, Fluctuation))
-                {
-                    OnRaiseTemperatureAlertEvent(new TemperatureAlertEventArgs(alert.Name));
-                }
+                alert.Check(Temperature.Value);
             }
-        }
-
-        protected void OnRaiseTemperatureAlertEvent(TemperatureAlertEventArgs e)
-        {
-            AlertEventHandler?.Invoke(this, e);
         }
     }
 }

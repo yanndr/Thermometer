@@ -21,7 +21,7 @@ namespace TemperatureLibrary
             }
 
             var temperature = e.Temperature.Unit != ThermometerUnit
-                    ? Converter.Convert(Temperature, ThermometerUnit)
+                    ? Converter.Convert(e.Temperature, ThermometerUnit)
                     : e.Temperature;
             
 

@@ -5,7 +5,7 @@ namespace TemperatureLibrary.Alerters
     public interface IAlerter
     {
         string Name { get; set; }
-        bool IsConditionReached(decimal tempererature, decimal fluctuation);
+        void Check(decimal tempererature);
     }
 
     /// <summary>

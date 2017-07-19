@@ -8,10 +8,11 @@ namespace TemperatureLibrary.Tests.Alerters
     {
         private readonly DropAlert dropAlert;
         private const string alertName = "dropAlert";
+        private bool alertRaised;
 
         public DropAlertFixture()
         {
-            dropAlert = new DropAlert(alertName, 10.0m,0.5m);    
+            dropAlert = new DropAlert(alertName, 10.0m, 0.5m, () => alertRaised = true);
         }
 
         [Fact]
@@ -26,92 +27,129 @@ namespace TemperatureLibrary.Tests.Alerters
         [Fact]
         public void ConstructorTestWithNullString()
         {
-            Assert.Throws<ArgumentNullException>(()=>new BidirectionalAlert(null, -50, -50));
+            Assert.Throws<ArgumentNullException>(() => new BidirectionalAlert(null, -50, -50, null));
         }
 
         [Fact]
         public void TemperatureRaisedToThresholdValueShouldReturnFalse()
         {
-            var result = dropAlert.IsConditionReached(10.0M, 0.5M);
-            Assert.False(result);
+            alertRaised = false;
+            dropAlert.Check(10.0M);
+            Assert.False(alertRaised);
         }
 
         [Fact]
         public void TemperatureDropToThresholdValueShouldReturnTrue()
         {
-            var result = dropAlert.IsConditionReached(10.0M, -0.5M);
-            Assert.True(result);
+            alertRaised = false;
+            dropAlert.Check(20.0m);
+            Assert.False(alertRaised);
+            dropAlert.Check(10.0M);
+            Assert.True(alertRaised);
         }
 
         [Fact]
         public void TemperatureDidNotReachThresholdValueShouldReturnFalse()
         {
-            var result = dropAlert.IsConditionReached(11.0M, 0.5M);
-            Assert.False(result);
+            alertRaised = false;
+            dropAlert.Check(11.0M);
+            Assert.False(alertRaised);
         }
 
         [Fact]
         public void TemperatureReachedThresholdMutlipleTimeWithInsignificantFluctuationUpShouldReturnOneAlert()
         {
-            var result = dropAlert.IsConditionReached(10.0M, -0.5M);
-            Assert.True(result);
+            alertRaised = false;
+            dropAlert.Check(15m);
+            Assert.False(alertRaised);
 
-            result = dropAlert.IsConditionReached(9.8M, -0.2M);
-            Assert.False(result);
+            alertRaised = false;
+            dropAlert.Check(10.0M);
+            Assert.True(alertRaised);
 
-            result = dropAlert.IsConditionReached(10.0M, 0.2M);
-            Assert.False(result);
+            alertRaised = false;
+            dropAlert.Check(9.8M);
+            Assert.False(alertRaised);
 
-            result = dropAlert.IsConditionReached(9.5M, -0.5M);
-            Assert.False(result);
+            alertRaised = false;
+            dropAlert.Check(10.0M);
+            Assert.False(alertRaised);
 
-            result = dropAlert.IsConditionReached(10.0M, 0.5M);
-            Assert.False(result);
+            alertRaised = false;
+            dropAlert.Check(9.5M);
+            Assert.False(alertRaised);
+
+            alertRaised = false;
+            dropAlert.Check(10.0M);
+            Assert.False(alertRaised);
         }
 
         [Fact]
         public void TemperatureReachedThresholdMutlipleTimeWithInsignificantFluctuationDownShouldReturnOneAlert()
         {
-            var result = dropAlert.IsConditionReached(10.0M, -0.5M);
-            Assert.True(result);
+            alertRaised = false;
+            dropAlert.Check(20.0M);
+            Assert.False(alertRaised);
 
-            result = dropAlert.IsConditionReached(10.2M, 0.2M);
-            Assert.False(result);
+            alertRaised = false;
+            dropAlert.Check(10.0M);
+            Assert.True(alertRaised);
 
-            result = dropAlert.IsConditionReached(10.0M, -0.2M);
-            Assert.False(result);
+            alertRaised = false;
+            dropAlert.Check(10.2M);
+            Assert.False(alertRaised);
 
-            result = dropAlert.IsConditionReached(10.5M, 0.5M);
-            Assert.False(result);
+            alertRaised = false;
+            dropAlert.Check(10.0M);
+            Assert.False(alertRaised);
 
-            result = dropAlert.IsConditionReached(10.0M, -0.5M);
-            Assert.False(result);
+            alertRaised = false;
+            dropAlert.Check(10.5M);
+            Assert.False(alertRaised);
+
+            alertRaised = false;
+            dropAlert.Check(10.0M);
+            Assert.False(alertRaised);
         }
 
         [Fact]
         public void TemperatureReachedThresholdValueAndFluctuateUpMoreThanFluctuationAllowedShouldReturnOneAlert()
         {
-            var result = dropAlert.IsConditionReached(10.0M, -0.5M);
-            Assert.True(result, "The alert should be issued.");
+            alertRaised = false;
+            dropAlert.Check(20.0M);
+            Assert.False(alertRaised);
 
-            result = dropAlert.IsConditionReached(9.0M, -1M);
-            Assert.False(result, "The alert shouldn't be issued.");
+            alertRaised = false;
+            dropAlert.Check(10.0M);
+            Assert.True(alertRaised);
 
-            result = dropAlert.IsConditionReached(10.0M, 1M);
-            Assert.False(result, "The alert should be issued.");
+            alertRaised = false;
+            dropAlert.Check(9.0M);
+            Assert.False(alertRaised);
+
+            alertRaised = false;
+            dropAlert.Check(10.0M);
+            Assert.False(alertRaised);
         }
 
         [Fact]
         public void TemperatureReachedThresholdValueAndFluctuateDownMoreThanFluctuationAllowedShouldReturnMultipleAlert()
         {
-            var result = dropAlert.IsConditionReached(10.0M, -0.5M);
-            Assert.True(result, "The alert should be issued.");
+            alertRaised = false;
+            dropAlert.Check(20.0M);
+            Assert.False(alertRaised);
 
-            result = dropAlert.IsConditionReached(11.0M, 1M);
-            Assert.False(result, "The alert shouldn't be issued.");
+            alertRaised = false;
+            dropAlert.Check(10.0M);
+            Assert.True(alertRaised);
 
-            result = dropAlert.IsConditionReached(10.0M, -1M);
-            Assert.True(result, "The alert should be issued.");
+            alertRaised = false;
+            dropAlert.Check(11.0M);
+            Assert.False(alertRaised);
+
+            alertRaised = false;
+            dropAlert.Check(10.0M);
+            Assert.True(alertRaised);
         }
     }
 }

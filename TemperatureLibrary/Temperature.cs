@@ -16,12 +16,12 @@ namespace TemperatureLibrary
 
         public static bool operator ==(Temperature a, Temperature b)
         {
-            if (System.Object.ReferenceEquals(a, b))
+            if (ReferenceEquals(a, b))
             {
                 return true;
             }
 
-            if (((object)a == null) || ((object)b == null))
+            if ((object)a == null || (object)b == null)
             {
                 return false;
             }
@@ -36,13 +36,8 @@ namespace TemperatureLibrary
 
         public override bool Equals(System.Object obj)
         {
-            Temperature p = obj as Temperature;
-            if ((object)p == null)
-            {
-                return false;
-            }
-
-            return base.Equals(obj);
+            var p = obj as Temperature;
+            return (object)p != null && base.Equals(obj);
         }
 
         public override int GetHashCode()
