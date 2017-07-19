@@ -7,9 +7,7 @@ There are three thermometers: Basic Thermometer, MultiUnit Thermometer and an Al
 
 The Alerter Thermometer allows you to set up temperature thresholds to receive an alert when the temperature reaches your chosen threshold.  
 
-#Usage
-
-There is a console project that shows how to use the library:thermometer-console .
+# Usage
 
 ```
 var converter = new TemperatureConverter(new ConverterFactory(
@@ -28,6 +26,8 @@ var alerters = new List<IAlerter>
 
 thermometer = new AlerterThermometer(Unit.Celsius,converter, alerters);
 ```
+
+In the solution you will find an example console project that shows how to use the library: thermometer-console .
 
 # Prerequistes
 ```
