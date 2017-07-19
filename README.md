@@ -13,25 +13,20 @@ There is a console project that shows how to use the library:thermometer-console
 
 ```
 var converter = new TemperatureConverter(new ConverterFactory(
-                new List<IUnitConverter>
-                {
-                    new CelsiusConverter(),
-                    new FahrenheitConverter()
-                }));
+    new List<IUnitConverter>
+    {
+        new CelsiusConverter(),
+        new FahrenheitConverter()
+    }));
 
-            var alerters = new List<IAlerter>
-            {
-                new DropAlert("Freezing alert", 0.0m, 0.5m,()=>Console.WriteLine("----Freezing Alert------s")),
-                new RaiseAlert("Boiling alert", 100, 0.5m,()=>Console.WriteLine("----Boiling Alert----")),
-                new BidirectionalAlert("Nice temperature alert", 28.0m, 1m,async () =>
-                {
-                    Console.WriteLine("----Really nice temperature starting a long process to notify everyone-------");
-                    await Task.Delay(3000);
-                    Console.WriteLine("----end of the really nice notification process-------");
-                })
-            };
+var alerters = new List<IAlerter>
+{
+    new DropAlert("Freezing alert", 0.0m, 0.5m,()=>Console.WriteLine("----Freezing Alert------s")),
+    new RaiseAlert("Boiling alert", 100, 0.5m,()=>Console.WriteLine("----Boiling Alert----")),
+    new BidirectionalAlert("Nice temperature alert", 28.0m, 1m,()=>Console.WriteLine("----Other Alert------s"))
+};
 
-            thermometer = new AlerterThermometer(Unit.Celsius,converter, alerters);
+thermometer = new AlerterThermometer(Unit.Celsius,converter, alerters);
 ```
 
 # Prerequistes
