@@ -15,7 +15,13 @@ namespace TemperatureLibrary.Tests.Thermometers
         [InlineData(Unit.Kelvin)]
         public void ConstructorTest(Unit unit)
         {
-            var thermometer = new AlerterThermometer(unit,null,null);
+            var converter = new Mock<ITemperatureConverter>();
+            converter.Setup(x => x.Convert(It.IsAny<ITemperature>(), It.IsAny<Unit>()))
+                .Returns(new Temperature(0.5m, Unit.Celsius));
+
+            var alerterMock = new Mock<IAlerter>();
+
+            var thermometer = new AlerterThermometer(unit, converter.Object, new List<IAlerter> { alerterMock.Object });
 
             Assert.Equal(unit, thermometer.ThermometerUnit);
             Assert.Equal(unit,thermometer.Temperature.Unit);
@@ -28,7 +34,12 @@ namespace TemperatureLibrary.Tests.Thermometers
         [InlineData(Unit.Kelvin)]
         public void HandleTemperatureChangedWithSameUnit(Unit unit)
         {
-            var thermometer = new AlerterThermometer(unit,null,null);
+            var converter = new Mock<ITemperatureConverter>();
+            converter.Setup(x => x.Convert(It.IsAny<ITemperature>(), It.IsAny<Unit>()))
+                .Returns(new Temperature(0.5m, Unit.Celsius));
+
+            var alerterMock = new Mock<IAlerter>();
+            var thermometer = new AlerterThermometer(unit, converter.Object, new List<IAlerter>{alerterMock.Object});
 
             thermometer.UpdateTemperature(new Temperature(10.5m,unit));
 
@@ -40,25 +51,19 @@ namespace TemperatureLibrary.Tests.Thermometers
             Assert.Equal(unit, thermometer.Temperature.Unit);
         }
 
-        [Theory]
-        [InlineData(Unit.Fahrenheit)]
-        [InlineData(Unit.Kelvin)]
-        public void HandleTemperatureChangedWithDifferentUnitAndNoAlertsTest(Unit unit)
-        {
-            var thermometer = new AlerterThermometer(Unit.Celsius,null,null);
-
-            Assert.Throws<MemberAccessException>(() => thermometer.UpdateTemperature(new Temperature(10.5m, unit))); 
-        }
 
         [Theory]
         [InlineData(Unit.Fahrenheit)]
         [InlineData(Unit.Kelvin)]
-        public void HandleTemperatureChangedWithDifferentUnitTest(Unit unit)
+        public void HandleTemperatureChangedWithDifferentUnit(Unit unit)
         {
             var converter = new Mock<ITemperatureConverter>();
             converter.Setup(x => x.Convert(It.IsAny<ITemperature>(), It.IsAny<Unit>()))
                 .Returns(new Temperature(0.5m, Unit.Celsius));
-            var thermometer = new AlerterThermometer(Unit.Celsius,converter.Object,null);
+
+            var alerterMock = new Mock<IAlerter>();
+
+            var thermometer = new AlerterThermometer(Unit.Celsius,converter.Object, new List<IAlerter> { alerterMock.Object });
 
             
             thermometer.UpdateTemperature(new Temperature(10.5m, unit));
@@ -66,26 +71,27 @@ namespace TemperatureLibrary.Tests.Thermometers
             Assert.Equal(Unit.Celsius, thermometer.Temperature.Unit);
         }
 
-        [Theory]
-        [InlineData(true)]
-        [InlineData(false)]
-        public void HandleTemperatureChangedWithAlerterTest(bool raiseAlert)
+        [Fact]
+        public void HandleTemperatureChangedWithAlerterTest()
         {
-            var alert = new Mock<IAlerter> {Name = "test"};
-
+            var alertIssued = false;
+            var alert = new BidirectionalAlert("test",10.5m,1m, () =>
+            {
+                alertIssued = true;
+            });
+           
             var alertList = new List<IAlerter>
             {
-                alert.Object
+                alert
             };
 
             var thermometer = new AlerterThermometer(Unit.Celsius, null, alertList);
-            var alertIssued = false;
 
-
+            thermometer.UpdateTemperature(new Temperature(0.5m, Unit.Celsius));
             thermometer.UpdateTemperature(new Temperature(10.5m, Unit.Celsius));
             Assert.Equal(10.5m, thermometer.Temperature.Value);
             Assert.Equal(Unit.Celsius, thermometer.Temperature.Unit);
-            Assert.Equal(raiseAlert, alertIssued);
+            Assert.Equal(true, alertIssued);
         }
     }
 }
