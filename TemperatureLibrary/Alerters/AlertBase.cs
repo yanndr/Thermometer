@@ -31,14 +31,6 @@ namespace TemperatureLibrary.Alerters
 
         protected Action Alert;
 
-        
-
-        /// <summary>
-        /// Constructor.
-        /// </summary>
-        /// <param name="alertName">The name of the alert to identifiy it.</param>
-        /// <param name="thresholdTemperature"> The threshold value of the alert.</param>
-        /// <param name="minimumReleventFluctuation">The minimum fluctuation considered relevent for alert.</param>
         protected AlertBase(string alertName, decimal thresholdTemperature, decimal minimumReleventFluctuation,Action alert)
         {
             if (alertName == null)

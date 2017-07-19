@@ -28,10 +28,16 @@ namespace TemperatureLibrary.Converter
                 return temperature;
             }
 
-           
-
-            var fromConverter = GetConverter(temperature.Unit);
-            var tempInKelvin = fromConverter.ToKelvin(temperature);
+            ITemperature tempInKelvin;
+            if (temperature.Unit == Unit.Kelvin)
+            {
+                tempInKelvin = temperature;
+            }
+            else
+            {
+                var fromConverter = GetConverter(temperature.Unit);
+                tempInKelvin = fromConverter.ToKelvin(temperature);
+            }
 
             if (unit == Unit.Kelvin)
             {

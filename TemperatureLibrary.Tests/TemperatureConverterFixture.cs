@@ -29,6 +29,18 @@ namespace TemperatureLibrary.Tests
         }
 
         [Theory]
+        [InlineData(273.15,0)]
+        [InlineData(333.15,60)]
+        [InlineData(298.15,25)]
+        public void KelvinToCelsius(decimal input, decimal expectedResult)
+        {
+            var temp = new Temperature(input, Unit.Kelvin);
+            var result = temperatureConverter.Convert(temp, Unit.Celsius);
+
+            Assert.Equal(expectedResult, Math.Round(result.Value, 2));
+        }
+
+        [Theory]
         [InlineData(0,32)]
         [InlineData(60,140)]
         [InlineData(25,77)]
@@ -62,6 +74,18 @@ namespace TemperatureLibrary.Tests
             var result = temperatureConverter.Convert(temp,Unit.Kelvin);
 
             Assert.Equal<decimal>(expectedResult,Math.Round(result.Value,2));
+        }
+
+        [Theory]
+        [InlineData(255.37,0)]
+        [InlineData(288.71,60.01)]
+        [InlineData(269.26,25)]
+        public void KelvinToFahrenheit(decimal input, decimal expectedResult)
+        {
+            var temp = new Temperature(input, Unit.Kelvin);
+            var result = temperatureConverter.Convert(temp, Unit.Fahrenheit);
+
+            Assert.Equal<decimal>(expectedResult, Math.Round(result.Value, 2));
         }
 
     }

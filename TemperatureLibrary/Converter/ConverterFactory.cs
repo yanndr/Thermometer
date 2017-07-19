@@ -10,6 +10,7 @@ namespace TemperatureLibrary.Converter
         public ConverterFactory(ICollection<IUnitConverter> converters){
             Converters = converters;
         }
+
         public IUnitConverter GetConverter(Unit unit)
         {
             return Converters.FirstOrDefault(converter => converter.IsApplicableToUnit(unit));

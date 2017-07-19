@@ -13,7 +13,12 @@ namespace ThermometerConsole
         private static IThermometer thermometer;
         static void Main(string[] args)
         {
-            var converter = new TemperatureConverter(new ConverterFactory(new List<IUnitConverter>{new CelsiusConverter(),new FahrenheitConverter()}));
+            var converter = new TemperatureConverter(new ConverterFactory(
+                new List<IUnitConverter>
+                {
+                    new CelsiusConverter(),
+                    new FahrenheitConverter()
+                }));
 
             var alerters = new List<IAlerter>
             {
@@ -30,29 +35,31 @@ namespace ThermometerConsole
             thermometer = new AlerterThermometer(Unit.Celsius,converter, alerters);
 
 
-            for (var i = 0; i < 4; i++)
+            for (var i = 0; i < 2; i++)
             {
                 foreach (var temperature in temperatures)
                 {
-                    Console.WriteLine("new temp received {0}", temperature);
-                    thermometer.UpdateTemperature(temperature);
+                    Console.Write("new temp received {0}", temperature);
+                    try
+                    {
+                        thermometer.UpdateTemperature(temperature);
+                        Console.WriteLine(" -- >temp in Thermometer {0}", thermometer.Temperature);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine();
+                        Console.WriteLine(ex.Message);
+                    }
+
                     Thread.Sleep(1000);
                 }
             }
         }
 
-        
-
-        private static void ChangeSourceTemperature(ITemperature temperature)
-        {
-            Console.WriteLine("new temp received {0}", temperature);
-            thermometer.UpdateTemperature(temperature);
-        }
-
         private static List<ITemperature> temperatures =
             new List<ITemperature>
             {
-                new Temperature(15.0m, Unit.Celsius),
+                new Temperature(15.0m, Unit.Kelvin),
                 new Temperature(12.0m, Unit.Celsius),
                 new Temperature(32.0m, Unit.Fahrenheit),
                 new Temperature(0.1m, Unit.Celsius),
@@ -67,7 +74,12 @@ namespace ThermometerConsole
                 new Temperature(70.0m,Unit.Celsius),
                 new Temperature(100.0m,Unit.Celsius),
                 new Temperature(110.0m,Unit.Celsius),
-                new Temperature(10.0m,Unit.Celsius)
+                new Temperature(10.0m,Unit.Celsius),
+                new Temperature(35.0m,Unit.Kelvin),
+                new Temperature(28.0m,Unit.Kelvin),
+                new Temperature(70.0m,Unit.Kelvin),
+                new Temperature(100.0m,Unit.Fahrenheit),
+                new Temperature(110.0m,Unit.Fahrenheit),
 
             };
     }

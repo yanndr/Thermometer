@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 
 namespace TemperatureLibrary.Alerters
 {
@@ -15,20 +14,9 @@ namespace TemperatureLibrary.Alerters
     /// </summary>
     public class DropAlert : AlertBase, IAlerter
     {
-        /// <summary>
-        /// Constructor.
-        /// </summary>
-        /// <param name="alertName">The name of the alert to identifiy it.</param>
-        /// <param name="thresholdTemperature"> The threshold value of the alert.</param>
-        /// <param name="minimumReleventFluctuation">The minimum fluctuation considered relevent for alert.</param>
         public DropAlert(string alertName, decimal thresholdTemperature, decimal minimumReleventFluctuation,Action action)
             : base(alertName, thresholdTemperature, minimumReleventFluctuation,action) { }
 
-        /// <summary>
-        /// Check if the condition is reached to issue the alert.
-        /// </summary>
-        /// <param name="temperature">The temperature to check.</param>
-        /// <returns>A boolean if the condition is reached to spread the alert.</returns>
         public override void Check(decimal temperature)
         {
             var fluctuation = temperature - previousTemperature;

@@ -9,7 +9,6 @@ namespace TemperatureLibrary
         Unit ThermometerUnit { get; set; }
         ITemperature Temperature { get;}
         void UpdateTemperature(ITemperature temperature);
-
     }
 
     public interface IMultiUnitThermometer

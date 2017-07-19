@@ -25,7 +25,6 @@ namespace TemperatureLibrary
 
             Temperature = temperature;
         }
-
     }
 
     /// <summary>

@@ -12,7 +12,6 @@ namespace TemperatureLibrary
 
         private  event EventHandler<TemperatureChangedEventArgs> TemperatureChanged;
 
-
         public AlerterThermometer(Unit unit, ITemperatureConverter converter,ICollection<IAlerter> alerters):base(unit,converter)
         {
             foreach (var alerter in alerters)

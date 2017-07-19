@@ -1,3 +1,5 @@
+using System;
+
 namespace TemperatureLibrary
 {
     public class Temperature :ITemperature
@@ -11,7 +13,7 @@ namespace TemperatureLibrary
         }
 
         public override string ToString(){
-            return string.Format("{0}°{1}",Value,((char)Unit).ToString());
+            return string.Format("{0}°{1}",Math.Round(Value,2),((char)Unit).ToString());
         } 
 
         public static bool operator ==(Temperature a, Temperature b)

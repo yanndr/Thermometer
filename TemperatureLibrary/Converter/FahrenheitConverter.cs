@@ -13,8 +13,8 @@ namespace TemperatureLibrary.Converter
         }
 
         public bool IsApplicableToUnit(Unit unit)
-         {
+        {
             return unit == Unit.Fahrenheit;
-         }
+        }
     }
 }
