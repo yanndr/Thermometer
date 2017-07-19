@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
+using System.Threading.Tasks;
 using TemperatureLibrary;
 using TemperatureLibrary.Alerters;
 using TemperatureLibrary.Converter;
@@ -18,40 +19,26 @@ namespace ThermometerConsole
             {
                 new DropAlert("Freezing alert", 0.0m, 0.5m,()=>Console.WriteLine("----Freezing Alert------s")),
                 new RaiseAlert("Boiling alert", 100, 0.5m,()=>Console.WriteLine("----Boiling Alert----")),
-                new BidirectionalAlert("Nice temperature alert", 28.0m, 1m,()=>Console.WriteLine("----I like this temperture alert-------"))
+                new BidirectionalAlert("Nice temperature alert", 28.0m, 1m,async () =>
+                {
+                    Console.WriteLine("----Really nice temperature starting a long process to notify everyone-------");
+                    await Task.Delay(3000);
+                    Console.WriteLine("----end of the really nice notification process-------");
+                })
             };
 
             thermometer = new AlerterThermometer(Unit.Celsius,converter, alerters);
 
 
-
-            ChangeSourceTemperature(new Temperature(15.0m,Unit.Celsius));
-            Thread.Sleep(1000);
-            ChangeSourceTemperature(new Temperature(32m,Unit.Fahrenheit));
-            Thread.Sleep(1000);
-            ChangeSourceTemperature(new Temperature(0.1m, Unit.Celsius));
-            Thread.Sleep(1000);
-            ChangeSourceTemperature(new Temperature(0.0m, Unit.Celsius));
-            Thread.Sleep(1000);
-            ChangeSourceTemperature(new Temperature(10.0m, Unit.Celsius));
-            Thread.Sleep(1000);
-            ChangeSourceTemperature(new Temperature(32.0m, Unit.Celsius));
-            Thread.Sleep(1000);
-            ChangeSourceTemperature(new Temperature(100.0m, Unit.Celsius));
-            Thread.Sleep(1000);
-            ChangeSourceTemperature(new Temperature(99.8m, Unit.Celsius));
-            Thread.Sleep(1000);
-            ChangeSourceTemperature(new Temperature(100m, Unit.Celsius));
-            Thread.Sleep(1000);
-            ChangeSourceTemperature(new Temperature(30m, Unit.Celsius));
-            Thread.Sleep(1000);
-            ChangeSourceTemperature(new Temperature(28m, Unit.Celsius));
-            Thread.Sleep(1000);
-            ChangeSourceTemperature(new Temperature(25m, Unit.Celsius));
-            Thread.Sleep(1000);
-            ChangeSourceTemperature(new Temperature(28m, Unit.Celsius));
-            Thread.Sleep(1000);
-            ChangeSourceTemperature(new Temperature(0m, Unit.Celsius));
+            for (var i = 0; i < 4; i++)
+            {
+                foreach (var temperature in temperatures)
+                {
+                    Console.WriteLine("new temp received {0}", temperature);
+                    thermometer.UpdateTemperature(temperature);
+                    Thread.Sleep(1000);
+                }
+            }
         }
 
         
@@ -61,5 +48,27 @@ namespace ThermometerConsole
             Console.WriteLine("new temp received {0}", temperature);
             thermometer.UpdateTemperature(temperature);
         }
+
+        private static List<ITemperature> temperatures =
+            new List<ITemperature>
+            {
+                new Temperature(15.0m, Unit.Celsius),
+                new Temperature(12.0m, Unit.Celsius),
+                new Temperature(32.0m, Unit.Fahrenheit),
+                new Temperature(0.1m, Unit.Celsius),
+                new Temperature(0.0m,Unit.Celsius),
+                new Temperature(23.0m,Unit.Celsius),
+                new Temperature(27.9m,Unit.Celsius),
+                new Temperature(28.0m,Unit.Celsius),
+                new Temperature(28.3m,Unit.Celsius),
+                new Temperature(28.0m,Unit.Celsius),
+                new Temperature(35.0m,Unit.Celsius),
+                new Temperature(28.0m,Unit.Celsius),
+                new Temperature(70.0m,Unit.Celsius),
+                new Temperature(100.0m,Unit.Celsius),
+                new Temperature(110.0m,Unit.Celsius),
+                new Temperature(10.0m,Unit.Celsius)
+
+            };
     }
 }
