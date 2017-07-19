@@ -7,5 +7,5 @@ WORKDIR /Thermometer
 COPY . .
 RUN dotnet restore
 RUN dotnet publish -c Release -o out
-WORKDIR /Thermometer/Converter-api
-ENTRYPOINT dotnet  out/Converter-api.dll
+WORKDIR /Thermometer/ThermometerConsole
+ENTRYPOINT dotnet  out/ThermometerConsole.dll
