@@ -1,5 +1,10 @@
 # Introduction
-This is an implementation of a temperature unit converter (so far) in C#.
+Work is in progress. I am updating a solution that I worte in 2011.
+So Far, I added a converter, a thermometer and a some alerts.
+
+I still need to fix some naming and comments.
+
+There is a console project that shows how to use the library.
 
 # Prerequistes
 - .net Core or Docker
@@ -12,7 +17,7 @@ Build the solution:
 
 
 Run the tests:
-> dotnet test ./TemperatureLibrary.Tests
+> dotnet test ./TemperatureLibrary.Tests/TemperatureLibrary.Tests.csproj
 
 
 # Run the Converter-api

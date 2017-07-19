@@ -16,7 +16,7 @@ namespace ThermometerConsole
 
             var alerters = new List<IAlerter>
             {
-                new DropAlert("Freezing alert", 0.0m, 0.5m,()=>Console.WriteLine("----Frezing Alert------s")),
+                new DropAlert("Freezing alert", 0.0m, 0.5m,()=>Console.WriteLine("----Freezing Alert------s")),
                 new RaiseAlert("Boiling alert", 100, 0.5m,()=>Console.WriteLine("----Boiling Alert----")),
                 new BidirectionalAlert("Nice temperature alert", 28.0m, 1m,()=>Console.WriteLine("----I like this temperture alert-------"))
             };
@@ -35,7 +35,23 @@ namespace ThermometerConsole
             Thread.Sleep(1000);
             ChangeSourceTemperature(new Temperature(10.0m, Unit.Celsius));
             Thread.Sleep(1000);
-            ChangeSourceTemperature(new Temperature(32.0m, Unit.Fahrenheit));
+            ChangeSourceTemperature(new Temperature(32.0m, Unit.Celsius));
+            Thread.Sleep(1000);
+            ChangeSourceTemperature(new Temperature(100.0m, Unit.Celsius));
+            Thread.Sleep(1000);
+            ChangeSourceTemperature(new Temperature(99.8m, Unit.Celsius));
+            Thread.Sleep(1000);
+            ChangeSourceTemperature(new Temperature(100m, Unit.Celsius));
+            Thread.Sleep(1000);
+            ChangeSourceTemperature(new Temperature(30m, Unit.Celsius));
+            Thread.Sleep(1000);
+            ChangeSourceTemperature(new Temperature(28m, Unit.Celsius));
+            Thread.Sleep(1000);
+            ChangeSourceTemperature(new Temperature(25m, Unit.Celsius));
+            Thread.Sleep(1000);
+            ChangeSourceTemperature(new Temperature(28m, Unit.Celsius));
+            Thread.Sleep(1000);
+            ChangeSourceTemperature(new Temperature(0m, Unit.Celsius));
         }
 
         
