@@ -1,17 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using TemperatureLibrary.Alerters;
-using TemperatureLibrary.Converter;
+
+
 
 namespace TemperatureLibrary
 {
-    public class Thermometer
+    public class Thermometer : IThermometer
     {
-        private readonly ICollection<IAlerter> alerters;
-        private readonly ITemperatureConverter converter;
-
-        public event EventHandler<TemperatureAlertEventArgs> AlertEventHandler;
-
         public Unit ThermometerUnit { get; set; }
         public ITemperature Temperature { get; private set; }
 
@@ -20,50 +14,27 @@ namespace TemperatureLibrary
         /// </summary>
         public decimal Fluctuation { get; protected set; }
 
-        private Thermometer() { }
+        protected Thermometer() { }
 
-        public Thermometer(Unit unit, ITemperatureConverter converter, ICollection<IAlerter> alerters)
+        public Thermometer(Unit unit)
         {
             ThermometerUnit = unit;
             Temperature = new Temperature(0.0m,unit);
-            this.converter = converter;
-            this.alerters = alerters;
+        }
+
+        protected void updateTemperature(ITemperature temperature){
+            Fluctuation = temperature.Value - Temperature.Value;
+            Temperature = temperature;
         }
 
         public virtual void HandleTemperatureChanged(object sender, TemperatureChangedEventArgs e)
         {
-            if (Temperature.Unit != e.Temperature.Unit && converter == null)
+            if (Temperature.Unit != e.Temperature.Unit)
             {
-                throw new MemberAccessException(string.Format("There is no converters with this thermometer. A {0} unit was recieved but the thermometer is set to {1} unit.",e.Temperature.Unit,ThermometerUnit));
+                throw new Exception(string.Format("Sorry this is a basic thermometer. A {0} unit was recieved but the thermometer is set to {1} unit.",e.Temperature.Unit,ThermometerUnit));
             }
 
-            var temperature = e.Temperature.Unit != ThermometerUnit
-                    ? converter.Convert(Temperature, ThermometerUnit)
-                    : e.Temperature;
-            
-
-            Fluctuation = temperature.Value - Temperature.Value;
-            Temperature = temperature;
-
-            if (alerters == null)
-                return;
-
-            foreach (var alert in alerters)
-            {
-                if (alert.IsConditionReached(Temperature.Value, Fluctuation))
-                {
-                    OnRaiseTemperatureAlertEvent(new TemperatureAlertEventArgs(alert.Name));
-                }
-            }
-        }
-
-        /// <summary>
-        /// Issue the alert.
-        /// </summary>
-        /// <param name="e">The event args to pass to the event.</param>
-        protected void OnRaiseTemperatureAlertEvent(TemperatureAlertEventArgs e)
-        {
-            AlertEventHandler?.Invoke(this, e);
+            updateTemperature(e.Temperature);
         }
     }
 

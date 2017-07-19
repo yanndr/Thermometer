@@ -1,13 +1,13 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Moq;
 using TemperatureLibrary.Alerters;
 using TemperatureLibrary.Converter;
 using Xunit;
 
-namespace TemperatureLibrary.Tests
+namespace TemperatureLibrary.Tests.Thermometers
 {
-    public class ThermometerFixture
+    public class AlerterThermometerFixture
     {
         [Theory]
         [InlineData(Unit.Celsius)]
@@ -15,7 +15,7 @@ namespace TemperatureLibrary.Tests
         [InlineData(Unit.Kelvin)]
         public void ConstructorTest(Unit unit)
         {
-            var thermometer = new Thermometer(unit,null,null);
+            var thermometer = new AlerterThermometer(unit,null,null);
 
             Assert.Equal(unit, thermometer.ThermometerUnit);
             Assert.Equal(unit,thermometer.Temperature.Unit);
@@ -26,9 +26,9 @@ namespace TemperatureLibrary.Tests
         [InlineData(Unit.Celsius)]
         [InlineData(Unit.Fahrenheit)]
         [InlineData(Unit.Kelvin)]
-        public void HandleTemperatureChangedWithSameUnitAndNoAlertsTest(Unit unit)
+        public void HandleTemperatureChangedWithSameUnit(Unit unit)
         {
-            var thermometer = new Thermometer(unit,null,null);
+            var thermometer = new AlerterThermometer(unit,null,null);
 
             thermometer.HandleTemperatureChanged(null,new TemperatureChangedEventArgs(new Temperature(10.5m,unit)));
 
@@ -47,7 +47,7 @@ namespace TemperatureLibrary.Tests
         [InlineData(Unit.Kelvin)]
         public void HandleTemperatureChangedWithDifferentUnitAndNoAlertsTest(Unit unit)
         {
-            var thermometer = new Thermometer(Unit.Celsius,null,null);
+            var thermometer = new AlerterThermometer(Unit.Celsius,null,null);
 
             Assert.Throws<MemberAccessException>(() => thermometer.HandleTemperatureChanged(null, new TemperatureChangedEventArgs(new Temperature(10.5m, unit)))); 
         }
@@ -60,7 +60,7 @@ namespace TemperatureLibrary.Tests
             var converter = new Mock<ITemperatureConverter>();
             converter.Setup(x => x.Convert(It.IsAny<ITemperature>(), It.IsAny<Unit>()))
                 .Returns(new Temperature(0.5m, Unit.Celsius));
-            var thermometer = new Thermometer(Unit.Celsius,converter.Object,null);
+            var thermometer = new AlerterThermometer(Unit.Celsius,converter.Object,null);
 
             
             thermometer.HandleTemperatureChanged(null, new TemperatureChangedEventArgs(new Temperature(10.5m, unit)));
@@ -82,7 +82,7 @@ namespace TemperatureLibrary.Tests
                 alert.Object
             };
 
-            var thermometer = new Thermometer(Unit.Celsius, null, alertList);
+            var thermometer = new AlerterThermometer(Unit.Celsius, null, alertList);
             var alertIssued = false;
 
             thermometer.AlertEventHandler += (sender, args) => { alertIssued = true; };
