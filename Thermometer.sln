@@ -9,9 +9,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Converter-api", "Converter-api\Converter-api.csproj", "{6EA061D1-604F-40D4-A411-0945F3DC7EC0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThermometerConsole", "ThermometerConsole\ThermometerConsole.csproj", "{F032416E-C606-45DC-AAD2-B44AAFCD9B74}"
-	ProjectSection(ProjectDependencies) = postProject
-		{B5E14D1E-BB74-4C2A-A1A3-3F802980FA1B} = {B5E14D1E-BB74-4C2A-A1A3-3F802980FA1B}
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
