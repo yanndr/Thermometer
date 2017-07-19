@@ -19,13 +19,17 @@ Build the solution:
 Run the tests:
 > dotnet test ./TemperatureLibrary.Tests/TemperatureLibrary.Tests.csproj
 
+# Run the Console example
+
+Run the api with dotnet:
+> 
+
+> dotnet run -p Converter-api.csproj 
 
 # Run the Converter-api
 
 Run the api with dotnet:
-> cd Converter-api
-
-> dotnet run -p Converter-api.csproj 
+> dotnet run -p ThermometerConsole/ThermometerConsole.csproj
 
 
 Run the api with Docker:
