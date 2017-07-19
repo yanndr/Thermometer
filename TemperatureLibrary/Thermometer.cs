@@ -1,7 +1,5 @@
 ﻿using System;
 
-
-
 namespace TemperatureLibrary
 {
     public class Thermometer : IThermometer
@@ -27,14 +25,8 @@ namespace TemperatureLibrary
         }
     }
 
-    /// <summary>
-    /// Class containing the data of a temperature changed event. 
-    /// </summary>
     public class TemperatureChangedEventArgs : EventArgs
     {
-        /// <summary>
-        /// The value of the temperature change.
-        /// </summary>
         public ITemperature Temperature { get; }
 
         public TemperatureChangedEventArgs(ITemperature temperature)
