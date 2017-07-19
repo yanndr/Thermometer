@@ -17,19 +17,15 @@ namespace TemperatureLibrary
             Temperature = new Temperature(0.0m,unit);
         }
 
-        protected void updateTemperature(ITemperature temperature){
+        public virtual void UpdateTemperature(ITemperature temperature){
+            if (Temperature.Unit != temperature.Unit)
+            {
+                throw new Exception(string.Format("Sorry this is a basic thermometer. A {0} unit was recieved but the thermometer is set to {1} unit.", temperature.Unit, ThermometerUnit));
+            }
+
             Temperature = temperature;
         }
 
-        public virtual void HandleTemperatureChanged(object sender, TemperatureChangedEventArgs e)
-        {
-            if (Temperature.Unit != e.Temperature.Unit)
-            {
-                throw new Exception(string.Format("Sorry this is a basic thermometer. A {0} unit was recieved but the thermometer is set to {1} unit.",e.Temperature.Unit,ThermometerUnit));
-            }
-
-            updateTemperature(e.Temperature);
-        }
     }
 
     /// <summary>

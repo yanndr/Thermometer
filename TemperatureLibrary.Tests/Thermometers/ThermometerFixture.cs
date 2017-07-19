@@ -26,12 +26,12 @@ namespace TemperatureLibrary.Tests.Thermometers
         {
             var thermometer = new Thermometer(unit);
 
-            thermometer.HandleTemperatureChanged(null,new TemperatureChangedEventArgs(new Temperature(10.5m,unit)));
+            thermometer.UpdateTemperature(new Temperature(10.5m,unit));
 
             Assert.Equal(10.5m, thermometer.Temperature.Value);
             Assert.Equal(unit, thermometer.Temperature.Unit);
 
-            thermometer.HandleTemperatureChanged(null, new TemperatureChangedEventArgs(new Temperature(5.5m, unit)));
+            thermometer.UpdateTemperature(new Temperature(5.5m, unit));
             Assert.Equal(5.5m, thermometer.Temperature.Value);
             Assert.Equal(unit, thermometer.Temperature.Unit);
         }
@@ -43,7 +43,7 @@ namespace TemperatureLibrary.Tests.Thermometers
         {
             var thermometer = new Thermometer(Unit.Celsius);
 
-            Assert.Throws<Exception>(() => thermometer.HandleTemperatureChanged(null, new TemperatureChangedEventArgs(new Temperature(10.5m, unit)))); 
+            Assert.Throws<Exception>(() => thermometer.UpdateTemperature(new Temperature(10.5m, unit))); 
         }
 
     }

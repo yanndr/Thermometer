@@ -9,8 +9,7 @@ namespace ThermometerConsole
 {
     class Program
     {
-        public static event EventHandler<TemperatureChangedEventArgs> temperatureChanged;
-
+        private static IThermometer thermometer;
         static void Main(string[] args)
         {
             var converter = new TemperatureConverter(new ConverterFactory(new List<IUnitConverter>{new CelsiusConverter(),new FahrenheitConverter()}));
@@ -22,9 +21,8 @@ namespace ThermometerConsole
                 new BidirectionalAlert("Nice temperature alert", 28.0m, 1m,()=>Console.WriteLine("----I like this temperture alert-------"))
             };
 
-            var thermometer = new AlerterThermometer(Unit.Celsius,converter, alerters);
+            thermometer = new AlerterThermometer(Unit.Celsius,converter, alerters);
 
-            temperatureChanged += thermometer.HandleTemperatureChanged;
 
 
             ChangeSourceTemperature(new Temperature(15.0m,Unit.Celsius));
@@ -45,7 +43,7 @@ namespace ThermometerConsole
         private static void ChangeSourceTemperature(ITemperature temperature)
         {
             Console.WriteLine("new temp received {0}", temperature);
-            temperatureChanged?.Invoke(null, new TemperatureChangedEventArgs(temperature));
+            thermometer.UpdateTemperature(temperature);
         }
     }
 }

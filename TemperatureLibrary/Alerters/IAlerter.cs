@@ -6,6 +6,7 @@ namespace TemperatureLibrary.Alerters
     {
         string Name { get; set; }
         void Check(decimal tempererature);
+        void HandleTemperatureChanged(object sender, TemperatureChangedEventArgs e);
     }
 
     /// <summary>

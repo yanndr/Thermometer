@@ -5,7 +5,7 @@ namespace TemperatureLibrary.Alerters
     /// <summary>
     /// Base class of an alert.
     /// </summary>
-    public abstract class AlertBase
+    public abstract class AlertBase: IAlerter
     {
         /// <summary>
         /// The name of the alert to identifiy it.
@@ -49,6 +49,15 @@ namespace TemperatureLibrary.Alerters
             MinimumReleventFluctuation = minimumReleventFluctuation;
             IsAlertOn = false;
             Alert = alert;
+        }
+
+        public  void HandleTemperatureChanged(object sender, TemperatureChangedEventArgs e)
+        {
+            Check(e.Temperature.Value);
+        }
+
+        public virtual void Check(decimal tempererature)
+        {
         }
     }
 }

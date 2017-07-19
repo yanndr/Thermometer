@@ -30,12 +30,12 @@ namespace TemperatureLibrary.Tests.Thermometers
         {
             var thermometer = new MultiUnitThermometer(unit,null);
 
-            thermometer.HandleTemperatureChanged(null,new TemperatureChangedEventArgs(new Temperature(10.5m,unit)));
+            thermometer.UpdateTemperature(new Temperature(10.5m,unit));
 
             Assert.Equal(10.5m, thermometer.Temperature.Value);
             Assert.Equal(unit, thermometer.Temperature.Unit);
 
-            thermometer.HandleTemperatureChanged(null, new TemperatureChangedEventArgs(new Temperature(5.5m, unit)));
+            thermometer.UpdateTemperature(new Temperature(5.5m, unit));
             Assert.Equal(5.5m, thermometer.Temperature.Value);
             Assert.Equal(unit, thermometer.Temperature.Unit);
         }
@@ -47,7 +47,7 @@ namespace TemperatureLibrary.Tests.Thermometers
         {
             var thermometer = new MultiUnitThermometer(Unit.Celsius,null);
 
-            Assert.Throws<MemberAccessException>(() => thermometer.HandleTemperatureChanged(null, new TemperatureChangedEventArgs(new Temperature(10.5m, unit)))); 
+            Assert.Throws<MemberAccessException>(() => thermometer.UpdateTemperature(new Temperature(10.5m, unit))); 
         }
 
         [Theory]
@@ -61,7 +61,7 @@ namespace TemperatureLibrary.Tests.Thermometers
             var thermometer = new MultiUnitThermometer(Unit.Celsius,converter.Object);
 
             
-            thermometer.HandleTemperatureChanged(null, new TemperatureChangedEventArgs(new Temperature(10.5m, unit)));
+            thermometer.UpdateTemperature(new Temperature(10.5m, unit));
             Assert.Equal(0.5m, thermometer.Temperature.Value);
             Assert.Equal(Unit.Celsius, thermometer.Temperature.Unit);
         }

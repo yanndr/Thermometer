@@ -22,7 +22,7 @@ namespace TemperatureLibrary.Alerters
         /// </summary>
         /// <param name="temperature">The temperature to check.</param>
         /// <returns>A boolean if the condition is reached to spread the alert.</returns>
-        public void Check(decimal temperature)
+        public override void Check(decimal temperature)
         {
             var fluctuation = temperature - previousTemperature;
             previousTemperature = temperature;

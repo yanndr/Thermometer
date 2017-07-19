@@ -8,7 +8,7 @@ namespace TemperatureLibrary
     {
         Unit ThermometerUnit { get; set; }
         ITemperature Temperature { get;}
-        void HandleTemperatureChanged(object sender, TemperatureChangedEventArgs e);
+        void UpdateTemperature(ITemperature temperature);
 
     }
 

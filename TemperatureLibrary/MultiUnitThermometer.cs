@@ -13,19 +13,19 @@ namespace TemperatureLibrary
             this.Converter = converter;
         }
 
-        public override void HandleTemperatureChanged(object sender, TemperatureChangedEventArgs e)
+        public override void UpdateTemperature(ITemperature temperature)
         {
-            if (Temperature.Unit != e.Temperature.Unit && Converter == null)
+            if (Temperature.Unit != temperature.Unit && Converter == null)
             {
-                throw new MemberAccessException(string.Format("There is no converters with this thermometer. A {0} unit was recieved but the thermometer is set to {1} unit.",e.Temperature.Unit,ThermometerUnit));
+                throw new MemberAccessException(string.Format("There is no converters with this thermometer. A {0} unit was recieved but the thermometer is set to {1} unit.",temperature.Unit,ThermometerUnit));
             }
 
-            var temperature = e.Temperature.Unit != ThermometerUnit
-                    ? Converter.Convert(e.Temperature, ThermometerUnit)
-                    : e.Temperature;
+            var temp = temperature.Unit != ThermometerUnit
+                    ? Converter.Convert(temperature, ThermometerUnit)
+                    : temperature;
             
 
-            updateTemperature(temperature);
+            base.UpdateTemperature(temp);
         }
     }
 }

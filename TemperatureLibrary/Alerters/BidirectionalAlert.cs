@@ -6,7 +6,7 @@ namespace TemperatureLibrary.Alerters
     /// <summary>
     /// Represents an alert issued when the temperature is reached if the temperature is droping or raising.
     /// </summary>
-    public class BidirectionalAlert : AlertBase, IAlerter
+    public class BidirectionalAlert : AlertBase
     {
         /// <summary>
         /// Constructor.
@@ -22,7 +22,7 @@ namespace TemperatureLibrary.Alerters
         /// </summary>
         /// <param name="temperature">The temperature to check.</param>
         /// <returns>A boolean if the condition is reached to spread the alert.</returns>
-        public void Check(decimal temperature)
+        public override void Check(decimal temperature)
         {
             if (temperature != ThresholdTemperature)
             {
