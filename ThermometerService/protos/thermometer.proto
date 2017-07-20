@@ -1,0 +1,22 @@
+﻿syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "Thermometer";
+option java_outer_classname = "ThermometerProto";
+option objc_class_prefix = "T";
+
+package ThermometerService.pb;
+
+// The thermometer service definition.
+service Thermometer {
+	rpc GetTemperature(TemperatureRequest) returns (TemperatureReply) {}
+}
+
+// The request message containing the user's name.
+message TemperatureRequest {
+}
+
+// The response message containing the greetings
+message TemperatureReply {
+	double value = 1;
+}

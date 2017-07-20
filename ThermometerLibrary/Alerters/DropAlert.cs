@@ -22,7 +22,7 @@ namespace ThermometerLibrary.Alerters
             var fluctuation = temperature - previousTemperature;
             previousTemperature = temperature;
 
-            if (temperature != ThresholdTemperature)
+            if (temperature > ThresholdTemperature)
             {
                 if (!IsAlertOn)
                     return;

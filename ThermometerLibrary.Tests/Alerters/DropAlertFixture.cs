@@ -27,7 +27,7 @@ namespace ThermometerLibrary.Tests.Alerters
         [Fact]
         public void ConstructorTestWithNullString()
         {
-            Assert.Throws<ArgumentNullException>(() => new BidirectionalAlert(null, -50, -50, null));
+            Assert.Throws<ArgumentNullException>(() => new DropAlert(null, -50, -50, null));
         }
 
         [Fact]
@@ -46,6 +46,18 @@ namespace ThermometerLibrary.Tests.Alerters
             Assert.False(alertRaised);
             dropAlert.Check(10.0M);
             Assert.True(alertRaised);
+            alertRaised = false;
+            dropAlert.Check(9.0M);
+            Assert.False(alertRaised);
+            alertRaised = false;
+            dropAlert.Check(0.0M);
+            Assert.False(alertRaised);
+            alertRaised = false;
+            dropAlert.Check(9.9M);
+            Assert.False(alertRaised);
+            alertRaised = false;
+            dropAlert.Check(5.0M);
+            Assert.False(alertRaised);
         }
 
         [Fact]

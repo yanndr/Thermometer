@@ -3,7 +3,7 @@
 namespace ThermometerLibrary.Alerters
 {
     /// <summary>
-    /// Represents an alert issued when the temperature is reached if the temperature is droping or raising.
+    /// Represents an alert issued when the exact temperature is reached if the temperature is droping or raising.
     /// </summary>
     public class BidirectionalAlert : AlertBase
     {
