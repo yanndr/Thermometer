@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using TemperatureLibrary;
-using TemperatureLibrary.Alerters;
-using TemperatureLibrary.Converter;
+using ThermometerLibrary;
+using ThermometerLibrary.Alerters;
+using ThermometerLibrary.Converter;
 
 namespace ThermometerConsole
 {

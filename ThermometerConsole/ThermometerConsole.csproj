@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TemperatureLibrary\TemperatureLibrary.csproj" />
+    <ProjectReference Include="..\ThermometerLibrary\ThermometerLibrary.csproj" />
   </ItemGroup>
 
 </Project>
