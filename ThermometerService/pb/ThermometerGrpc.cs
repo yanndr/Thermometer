@@ -17,6 +17,8 @@ namespace ThermometerService.Pb {
 
     static readonly grpc::Marshaller<global::ThermometerService.Pb.TemperatureRequest> __Marshaller_TemperatureRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::ThermometerService.Pb.TemperatureRequest.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::ThermometerService.Pb.TemperatureReply> __Marshaller_TemperatureReply = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::ThermometerService.Pb.TemperatureReply.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::ThermometerService.Pb.UpdateTemperatureRequest> __Marshaller_UpdateTemperatureRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::ThermometerService.Pb.UpdateTemperatureRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::ThermometerService.Pb.UpdateTemperatureReply> __Marshaller_UpdateTemperatureReply = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::ThermometerService.Pb.UpdateTemperatureReply.Parser.ParseFrom);
 
     static readonly grpc::Method<global::ThermometerService.Pb.TemperatureRequest, global::ThermometerService.Pb.TemperatureReply> __Method_GetTemperature = new grpc::Method<global::ThermometerService.Pb.TemperatureRequest, global::ThermometerService.Pb.TemperatureReply>(
         grpc::MethodType.Unary,
@@ -24,6 +26,13 @@ namespace ThermometerService.Pb {
         "GetTemperature",
         __Marshaller_TemperatureRequest,
         __Marshaller_TemperatureReply);
+
+    static readonly grpc::Method<global::ThermometerService.Pb.UpdateTemperatureRequest, global::ThermometerService.Pb.UpdateTemperatureReply> __Method_UpdateTemperature = new grpc::Method<global::ThermometerService.Pb.UpdateTemperatureRequest, global::ThermometerService.Pb.UpdateTemperatureReply>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "UpdateTemperature",
+        __Marshaller_UpdateTemperatureRequest,
+        __Marshaller_UpdateTemperatureReply);
 
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
@@ -35,6 +44,11 @@ namespace ThermometerService.Pb {
     public abstract partial class ThermometerBase
     {
       public virtual global::System.Threading.Tasks.Task<global::ThermometerService.Pb.TemperatureReply> GetTemperature(global::ThermometerService.Pb.TemperatureRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      public virtual global::System.Threading.Tasks.Task<global::ThermometerService.Pb.UpdateTemperatureReply> UpdateTemperature(global::ThermometerService.Pb.UpdateTemperatureRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -80,6 +94,22 @@ namespace ThermometerService.Pb {
       {
         return CallInvoker.AsyncUnaryCall(__Method_GetTemperature, null, options, request);
       }
+      public virtual global::ThermometerService.Pb.UpdateTemperatureReply UpdateTemperature(global::ThermometerService.Pb.UpdateTemperatureRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      {
+        return UpdateTemperature(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual global::ThermometerService.Pb.UpdateTemperatureReply UpdateTemperature(global::ThermometerService.Pb.UpdateTemperatureRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_UpdateTemperature, null, options, request);
+      }
+      public virtual grpc::AsyncUnaryCall<global::ThermometerService.Pb.UpdateTemperatureReply> UpdateTemperatureAsync(global::ThermometerService.Pb.UpdateTemperatureRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      {
+        return UpdateTemperatureAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual grpc::AsyncUnaryCall<global::ThermometerService.Pb.UpdateTemperatureReply> UpdateTemperatureAsync(global::ThermometerService.Pb.UpdateTemperatureRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_UpdateTemperature, null, options, request);
+      }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
       protected override ThermometerClient NewInstance(ClientBaseConfiguration configuration)
       {
@@ -92,7 +122,8 @@ namespace ThermometerService.Pb {
     public static grpc::ServerServiceDefinition BindService(ThermometerBase serviceImpl)
     {
       return grpc::ServerServiceDefinition.CreateBuilder()
-          .AddMethod(__Method_GetTemperature, serviceImpl.GetTemperature).Build();
+          .AddMethod(__Method_GetTemperature, serviceImpl.GetTemperature)
+          .AddMethod(__Method_UpdateTemperature, serviceImpl.UpdateTemperature).Build();
     }
 
   }

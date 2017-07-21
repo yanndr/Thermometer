@@ -6,6 +6,7 @@ using ThermometerService.Pb;
 using ThermometerLibrary;
 using ThermometerLibrary.Alerters;
 using ThermometerLibrary.Converter;
+using Unit = ThermometerLibrary.Unit;
 
 namespace ThermometerService
 {
@@ -14,8 +15,15 @@ namespace ThermometerService
         // Server side handler 
         public override Task<TemperatureReply> GetTemperature(TemperatureRequest request, ServerCallContext context)
         {
+            return Task.FromResult(new TemperatureReply { Value = (double)Program.Thermometer.Temperature.Value, Unit = Pb.Unit.Celsius});
+        }
 
-            return Task.FromResult(new TemperatureReply { Value = (double)Program.Thermometer.Temperature.Value });
+        public override Task<UpdateTemperatureReply> UpdateTemperature(UpdateTemperatureRequest request, ServerCallContext context)
+        {
+            var temp = new Temperature((decimal)request.Value,Unit.Celsius);
+            Console.WriteLine("New Temp received: {0}", temp);
+            Program.Thermometer.UpdateTemperature(temp);
+            return Task.FromResult(new UpdateTemperatureReply());
         }
     }
 
@@ -47,7 +55,7 @@ namespace ThermometerService
                 })
             };
 
-            Thermometer = new AlerterThermometer(Unit.Celsius, converter, alerters);
+            Thermometer = new AlerterThermometer(ThermometerLibrary.Unit.Celsius, converter, alerters);
            
 
             var server = new Server
@@ -56,7 +64,6 @@ namespace ThermometerService
                 Ports = { new ServerPort("localhost", Port, ServerCredentials.Insecure) }
             };
             server.Start();
-            UpdateTemperature();
 
             Console.WriteLine("Thermometer server listening on port " + Port);
             Console.WriteLine("Press any key to stop the server...");
@@ -65,23 +72,5 @@ namespace ThermometerService
 
             server.ShutdownAsync().Wait();
         }
-
-        public static async Task UpdateTemperature()
-        {
-            const double minValue = -1.0;
-            const double maxValue = 1.0;
-
-            while (true)
-            {
-                var rnd = new Random();
-                var value = rnd.NextDouble() * (maxValue - minValue) + minValue;
-                var temp = new Temperature(Thermometer.Temperature.Value + (decimal) value, Unit.Celsius);
-                Thermometer.UpdateTemperature(temp);
-//                Console.WriteLine("new temp received: {0}", temp);
-                await Task.Delay(1000);
-            }
-        }
-
-
     }
 }

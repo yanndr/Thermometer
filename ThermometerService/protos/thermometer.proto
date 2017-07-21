@@ -10,6 +10,7 @@ package ThermometerService.pb;
 // The thermometer service definition.
 service Thermometer {
 	rpc GetTemperature(TemperatureRequest) returns (TemperatureReply) {}
+	rpc UpdateTemperature(UpdateTemperatureRequest) returns (UpdateTemperatureReply) {}
 }
 
 // The request message containing the user's name.
@@ -19,4 +20,21 @@ message TemperatureRequest {
 // The response message containing the greetings
 message TemperatureReply {
 	double value = 1;
+	Unit unit=2;
+}
+
+// The request message containing the user's name.
+message UpdateTemperatureRequest {
+	double value =1;
+	Unit init =2;
+}
+
+// The response message containing the greetings
+message UpdateTemperatureReply {
+}
+
+enum Unit {
+  KELVIN = 0;
+  CELSIUS = 1;
+  FAHRENHEIT =2;
 }

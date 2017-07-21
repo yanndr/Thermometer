@@ -10,6 +10,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThermometerConsole", "Therm
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThermometerService", "ThermometerService\ThermometerService.csproj", "{59882C79-938A-47BE-ACE6-408845437BA5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TemperatureUpdater", "TemperatureUpdater\TemperatureUpdater.csproj", "{98FCB5FA-58AB-4557-B58E-298CEF748CE7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -68,6 +70,18 @@ Global
 		{59882C79-938A-47BE-ACE6-408845437BA5}.Release|x64.Build.0 = Release|Any CPU
 		{59882C79-938A-47BE-ACE6-408845437BA5}.Release|x86.ActiveCfg = Release|Any CPU
 		{59882C79-938A-47BE-ACE6-408845437BA5}.Release|x86.Build.0 = Release|Any CPU
+		{98FCB5FA-58AB-4557-B58E-298CEF748CE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98FCB5FA-58AB-4557-B58E-298CEF748CE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98FCB5FA-58AB-4557-B58E-298CEF748CE7}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{98FCB5FA-58AB-4557-B58E-298CEF748CE7}.Debug|x64.Build.0 = Debug|Any CPU
+		{98FCB5FA-58AB-4557-B58E-298CEF748CE7}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{98FCB5FA-58AB-4557-B58E-298CEF748CE7}.Debug|x86.Build.0 = Debug|Any CPU
+		{98FCB5FA-58AB-4557-B58E-298CEF748CE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98FCB5FA-58AB-4557-B58E-298CEF748CE7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98FCB5FA-58AB-4557-B58E-298CEF748CE7}.Release|x64.ActiveCfg = Release|Any CPU
+		{98FCB5FA-58AB-4557-B58E-298CEF748CE7}.Release|x64.Build.0 = Release|Any CPU
+		{98FCB5FA-58AB-4557-B58E-298CEF748CE7}.Release|x86.ActiveCfg = Release|Any CPU
+		{98FCB5FA-58AB-4557-B58E-298CEF748CE7}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

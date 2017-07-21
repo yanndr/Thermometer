@@ -23,21 +23,40 @@ namespace ThermometerService.Pb {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "ChF0aGVybW9tZXRlci5wcm90bxIVVGhlcm1vbWV0ZXJTZXJ2aWNlLnBiIhQK",
-            "ElRlbXBlcmF0dXJlUmVxdWVzdCIhChBUZW1wZXJhdHVyZVJlcGx5Eg0KBXZh",
-            "bHVlGAEgASgBMnUKC1RoZXJtb21ldGVyEmYKDkdldFRlbXBlcmF0dXJlEiku",
-            "VGhlcm1vbWV0ZXJTZXJ2aWNlLnBiLlRlbXBlcmF0dXJlUmVxdWVzdBonLlRo",
-            "ZXJtb21ldGVyU2VydmljZS5wYi5UZW1wZXJhdHVyZVJlcGx5IgBCJQoLVGhl",
-            "cm1vbWV0ZXJCEFRoZXJtb21ldGVyUHJvdG9QAaICAVRiBnByb3RvMw=="));
+            "ElRlbXBlcmF0dXJlUmVxdWVzdCJMChBUZW1wZXJhdHVyZVJlcGx5Eg0KBXZh",
+            "bHVlGAEgASgBEikKBHVuaXQYAiABKA4yGy5UaGVybW9tZXRlclNlcnZpY2Uu",
+            "cGIuVW5pdCJUChhVcGRhdGVUZW1wZXJhdHVyZVJlcXVlc3QSDQoFdmFsdWUY",
+            "ASABKAESKQoEaW5pdBgCIAEoDjIbLlRoZXJtb21ldGVyU2VydmljZS5wYi5V",
+            "bml0IhgKFlVwZGF0ZVRlbXBlcmF0dXJlUmVwbHkqLwoEVW5pdBIKCgZLRUxW",
+            "SU4QABILCgdDRUxTSVVTEAESDgoKRkFIUkVOSEVJVBACMuwBCgtUaGVybW9t",
+            "ZXRlchJmCg5HZXRUZW1wZXJhdHVyZRIpLlRoZXJtb21ldGVyU2VydmljZS5w",
+            "Yi5UZW1wZXJhdHVyZVJlcXVlc3QaJy5UaGVybW9tZXRlclNlcnZpY2UucGIu",
+            "VGVtcGVyYXR1cmVSZXBseSIAEnUKEVVwZGF0ZVRlbXBlcmF0dXJlEi8uVGhl",
+            "cm1vbWV0ZXJTZXJ2aWNlLnBiLlVwZGF0ZVRlbXBlcmF0dXJlUmVxdWVzdBot",
+            "LlRoZXJtb21ldGVyU2VydmljZS5wYi5VcGRhdGVUZW1wZXJhdHVyZVJlcGx5",
+            "IgBCJQoLVGhlcm1vbWV0ZXJCEFRoZXJtb21ldGVyUHJvdG9QAaICAVRiBnBy",
+            "b3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
-          new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
+          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::ThermometerService.Pb.Unit), }, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::ThermometerService.Pb.TemperatureRequest), global::ThermometerService.Pb.TemperatureRequest.Parser, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::ThermometerService.Pb.TemperatureReply), global::ThermometerService.Pb.TemperatureReply.Parser, new[]{ "Value" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::ThermometerService.Pb.TemperatureReply), global::ThermometerService.Pb.TemperatureReply.Parser, new[]{ "Value", "Unit" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::ThermometerService.Pb.UpdateTemperatureRequest), global::ThermometerService.Pb.UpdateTemperatureRequest.Parser, new[]{ "Value", "Init" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::ThermometerService.Pb.UpdateTemperatureReply), global::ThermometerService.Pb.UpdateTemperatureReply.Parser, null, null, null, null)
           }));
     }
     #endregion
 
   }
+  #region Enums
+  public enum Unit {
+    [pbr::OriginalName("KELVIN")] Kelvin = 0,
+    [pbr::OriginalName("CELSIUS")] Celsius = 1,
+    [pbr::OriginalName("FAHRENHEIT")] Fahrenheit = 2,
+  }
+
+  #endregion
+
   #region Messages
   /// <summary>
   /// The request message containing the user's name.
@@ -159,6 +178,7 @@ namespace ThermometerService.Pb {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public TemperatureReply(TemperatureReply other) : this() {
       value_ = other.value_;
+      unit_ = other.unit_;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -177,6 +197,17 @@ namespace ThermometerService.Pb {
       }
     }
 
+    /// <summary>Field number for the "unit" field.</summary>
+    public const int UnitFieldNumber = 2;
+    private global::ThermometerService.Pb.Unit unit_ = 0;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::ThermometerService.Pb.Unit Unit {
+      get { return unit_; }
+      set {
+        unit_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as TemperatureReply);
@@ -191,6 +222,7 @@ namespace ThermometerService.Pb {
         return true;
       }
       if (Value != other.Value) return false;
+      if (Unit != other.Unit) return false;
       return true;
     }
 
@@ -198,6 +230,7 @@ namespace ThermometerService.Pb {
     public override int GetHashCode() {
       int hash = 1;
       if (Value != 0D) hash ^= Value.GetHashCode();
+      if (Unit != 0) hash ^= Unit.GetHashCode();
       return hash;
     }
 
@@ -212,6 +245,10 @@ namespace ThermometerService.Pb {
         output.WriteRawTag(9);
         output.WriteDouble(Value);
       }
+      if (Unit != 0) {
+        output.WriteRawTag(16);
+        output.WriteEnum((int) Unit);
+      }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -219,6 +256,9 @@ namespace ThermometerService.Pb {
       int size = 0;
       if (Value != 0D) {
         size += 1 + 8;
+      }
+      if (Unit != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Unit);
       }
       return size;
     }
@@ -230,6 +270,9 @@ namespace ThermometerService.Pb {
       }
       if (other.Value != 0D) {
         Value = other.Value;
+      }
+      if (other.Unit != 0) {
+        Unit = other.Unit;
       }
     }
 
@@ -245,6 +288,250 @@ namespace ThermometerService.Pb {
             Value = input.ReadDouble();
             break;
           }
+          case 16: {
+            unit_ = (global::ThermometerService.Pb.Unit) input.ReadEnum();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  /// <summary>
+  /// The request message containing the user's name.
+  /// </summary>
+  public sealed partial class UpdateTemperatureRequest : pb::IMessage<UpdateTemperatureRequest> {
+    private static readonly pb::MessageParser<UpdateTemperatureRequest> _parser = new pb::MessageParser<UpdateTemperatureRequest>(() => new UpdateTemperatureRequest());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<UpdateTemperatureRequest> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::ThermometerService.Pb.ThermometerReflection.Descriptor.MessageTypes[2]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public UpdateTemperatureRequest() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public UpdateTemperatureRequest(UpdateTemperatureRequest other) : this() {
+      value_ = other.value_;
+      init_ = other.init_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public UpdateTemperatureRequest Clone() {
+      return new UpdateTemperatureRequest(this);
+    }
+
+    /// <summary>Field number for the "value" field.</summary>
+    public const int ValueFieldNumber = 1;
+    private double value_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public double Value {
+      get { return value_; }
+      set {
+        value_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "init" field.</summary>
+    public const int InitFieldNumber = 2;
+    private global::ThermometerService.Pb.Unit init_ = 0;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::ThermometerService.Pb.Unit Init {
+      get { return init_; }
+      set {
+        init_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as UpdateTemperatureRequest);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(UpdateTemperatureRequest other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Value != other.Value) return false;
+      if (Init != other.Init) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Value != 0D) hash ^= Value.GetHashCode();
+      if (Init != 0) hash ^= Init.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Value != 0D) {
+        output.WriteRawTag(9);
+        output.WriteDouble(Value);
+      }
+      if (Init != 0) {
+        output.WriteRawTag(16);
+        output.WriteEnum((int) Init);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Value != 0D) {
+        size += 1 + 8;
+      }
+      if (Init != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Init);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(UpdateTemperatureRequest other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Value != 0D) {
+        Value = other.Value;
+      }
+      if (other.Init != 0) {
+        Init = other.Init;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 9: {
+            Value = input.ReadDouble();
+            break;
+          }
+          case 16: {
+            init_ = (global::ThermometerService.Pb.Unit) input.ReadEnum();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  /// <summary>
+  /// The response message containing the greetings
+  /// </summary>
+  public sealed partial class UpdateTemperatureReply : pb::IMessage<UpdateTemperatureReply> {
+    private static readonly pb::MessageParser<UpdateTemperatureReply> _parser = new pb::MessageParser<UpdateTemperatureReply>(() => new UpdateTemperatureReply());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<UpdateTemperatureReply> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::ThermometerService.Pb.ThermometerReflection.Descriptor.MessageTypes[3]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public UpdateTemperatureReply() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public UpdateTemperatureReply(UpdateTemperatureReply other) : this() {
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public UpdateTemperatureReply Clone() {
+      return new UpdateTemperatureReply(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as UpdateTemperatureReply);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(UpdateTemperatureReply other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(UpdateTemperatureReply other) {
+      if (other == null) {
+        return;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
         }
       }
     }
