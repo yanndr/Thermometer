@@ -43,7 +43,7 @@ Build the solution:
 
 Run the tests:
 ```
-> dotnet test ./TemperatureLibrary.Tests/TemperatureLibrary.Tests.csproj
+> dotnet test ./ThermometerLibrary.Tests/ThermometerLibrary.Tests.csproj
 ```
 
 # Run the Console example

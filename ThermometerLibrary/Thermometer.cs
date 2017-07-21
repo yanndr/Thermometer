@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TemperatureLibrary
+namespace ThermometerLibrary
 {
     public class Thermometer : IThermometer
     {
