@@ -31,7 +31,7 @@ namespace TemperatureUpdater
                     var temp = new Temperature((decimal) value, ThermometerLibrary.Unit.Celsius);
                     client.UpdateTemperature(
                         new UpdateTemperatureRequest {Value = (double) temp.Value, Init = Unit.Celsius});
-                    Thread.Sleep(1000);
+                    Thread.Sleep(2000);
                 }
             });
             

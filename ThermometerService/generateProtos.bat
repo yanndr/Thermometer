@@ -1,1 +1,0 @@
-C:\Users\ydruffin\.nuget\packages\grpc.tools\1.4.1\tools\windows_x86\protoc.exe -I protos\ --csharp_out pb --grpc_out pb protos\thermometer.proto --plugin=protoc-gen-grpc=C:\Users\ydruffin\.nuget\packages\grpc.tools\1.4.1\tools\windows_x86\grpc_csharp_plugin.exe
