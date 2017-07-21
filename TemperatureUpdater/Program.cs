@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using Grpc.Core;
 using ThermometerLibrary;
@@ -16,27 +18,30 @@ namespace TemperatureUpdater
 
             var client = new Thermometer.ThermometerClient(channel);
 
-            UpdateTemperature(client);
-            
+            var cancel = false;
+            var task = Task.Factory.StartNew(() =>
+            {
+                const double minValue = -10.0;
+                const double maxValue = 110.0;
+
+                while (!cancel)
+                {
+                    var rnd = new Random();
+                    var value = rnd.NextDouble() * (maxValue - minValue) + minValue;
+                    var temp = new Temperature((decimal) value, ThermometerLibrary.Unit.Celsius);
+                    client.UpdateTemperature(
+                        new UpdateTemperatureRequest {Value = (double) temp.Value, Init = Unit.Celsius});
+                    Thread.Sleep(1000);
+                }
+            });
             
             Console.WriteLine("Press any key to exit...");
             Console.ReadKey();
+            cancel = true;
+            task.Wait();
+
             channel.ShutdownAsync().Wait();
         }
 
-        public static async Task UpdateTemperature(Thermometer.ThermometerClient client)
-        {
-            const double minValue = -10.0;
-            const double maxValue = 100.0;
-
-            while (true)
-            {
-                var rnd = new Random();
-                var value = rnd.NextDouble() * (maxValue - minValue) + minValue;
-                var temp = new Temperature((decimal)value, ThermometerLibrary.Unit.Celsius);
-                client.UpdateTemperature(new UpdateTemperatureRequest{Value=(double)temp.Value, Init=Unit.Celsius });
-                await Task.Delay(1000);
-            }
-        }
     }
 }

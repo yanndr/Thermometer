@@ -46,8 +46,8 @@ namespace ThermometerService
             var alerters = new List<IAlerter>
             {
                 new DropAlert("Freezing alert", 0.0m, 0.5m,()=>Console.WriteLine("----Freezing Alert------s")),
-                new RaiseAlert("Boiling alert", 2m, 0.5m,()=>Console.WriteLine("----Boiling Alert----")),
-                new BidirectionalAlert("Exact 1 Degree", 1m, 1m,async () =>
+                new RaiseAlert("Boiling alert", 100m, 0.5m,()=>Console.WriteLine("----Boiling Alert----")),
+                new BidirectionalAlert("28 Degree", 28m, 1m,async () =>
                 {
                     Console.WriteLine("---- long process to notify everyone-------");
                     await Task.Delay(3000);
