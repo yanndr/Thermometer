@@ -50,7 +50,7 @@ Run the tests:
 
 Run the example with dotnet:
 ```
-> dotnet run -p Converter-api.csproj 
+> dotnet run -p ThermometerConsole/ThermometerConsole.csproj
 ```
 
 Run the example with Docker:
