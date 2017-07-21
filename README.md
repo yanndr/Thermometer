@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/yanndr/Thermometer.svg?branch=master)](https://travis-ci.org/yanndr/Thermometer)
+
 # Introduction
 This is a C# .net core Temperature/Thermometer Library.
 
