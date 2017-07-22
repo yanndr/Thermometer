@@ -41,11 +41,11 @@ namespace ThermometerLibrary.Tests.Alerters
         }
 
         [Fact]
-        public void TemperaturemDidNotReachThresholdValueShouldReturnFalse()
+        public void TemperaturemWentAboveThresholdValueShouldReturnTrue()
         {
             alertRaised = false;
             alert.Check(11.0M);
-            Assert.False(alertRaised);
+            Assert.True(alertRaised);
         }
 
         [Fact]

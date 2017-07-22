@@ -36,7 +36,7 @@ namespace ThermometerLibrary.Tests.Integrations
                 thermometer.UpdateTemperature(temperature);
             }
 
-            Assert.Equal(2,numberOfAlert1);
+            Assert.Equal(4,numberOfAlert1);
             Assert.Equal(1,numberOfAlert2);
             Assert.Equal(2,numberOfAlert3);
         }
