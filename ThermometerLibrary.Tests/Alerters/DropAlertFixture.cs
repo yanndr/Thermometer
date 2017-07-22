@@ -42,6 +42,24 @@ namespace ThermometerLibrary.Tests.Alerters
         public void TemperatureDropToThresholdValueShouldReturnTrue()
         {
             alertRaised = false;
+            dropAlert.Check(15.0M);
+            dropAlert.Check(10.0M);
+            Assert.True(alertRaised);
+        }
+
+        [Fact]
+        public void TemperatureDropBelowThresholdValueShouldReturnTrue()
+        {
+            alertRaised = false;
+            dropAlert.Check(15.0M);
+            dropAlert.Check(5.0M);
+            Assert.True(alertRaised);
+        }
+
+        [Fact]
+        public void TemperatureDropToThresholdValueOnceShouldReturnTrue()
+        {
+            alertRaised = false;
             dropAlert.Check(20.0m);
             Assert.False(alertRaised);
             dropAlert.Check(10.0M);
