@@ -55,6 +55,16 @@ Run the example with dotnet:
 > dotnet run -p ThermometerConsole/ThermometerConsole.csproj
 ```
 
+Run the server example with dotnet:
+```
+> dotnet run -p ThermometerSercice/ThermometerService.csproj
+```
+
+Run the Temperature updater example to feed the Termomether servie with dotnet:
+```
+> dotnet run -p TemperatureUpdater/TemperatureUpdater.csproj
+```
+
 Run the example with Docker:
 ```
 - build the image:
