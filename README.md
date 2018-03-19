@@ -48,7 +48,7 @@ Run the tests:
 > dotnet test ./ThermometerLibrary.Tests/ThermometerLibrary.Tests.csproj
 ```
 
-# Run the Console example
+# Run the examples
 
 Run the example with dotnet:
 ```
