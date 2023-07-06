@@ -20,7 +20,7 @@ namespace ThermometerLibrary.Tests.Alerters
         {
             Assert.Equal(alertName, dropAlert.Name);
             Assert.Equal(10.0M, dropAlert.ThresholdTemperature);
-            Assert.Equal(0.5M, dropAlert.MinimumReleventFluctuation);
+            Assert.Equal(0.5M, dropAlert.MinimumRelevantFluctuation);
             Assert.Equal(false, dropAlert.IsAlertOn);
         }
 

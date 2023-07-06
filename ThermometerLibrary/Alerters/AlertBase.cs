@@ -1,55 +1,51 @@
 ﻿using System;
 
-namespace ThermometerLibrary.Alerters
+namespace ThermometerLibrary.Alerters;
+
+/// <summary>
+/// Base class of an alert.
+/// </summary>
+public abstract class AlertBase: IAlerter
 {
     /// <summary>
-    /// Base class of an alert.
+    /// The name of the alert to identify it.
     /// </summary>
-    public abstract class AlertBase: IAlerter
+    public string Name { get; set; }
+
+    /// <summary>
+    /// The threshold value of the alert.
+    /// </summary>
+    public decimal ThresholdTemperature { get; }
+
+    /// <summary>
+    /// The minimum fluctuation considered relevant for alert.
+    /// </summary>
+    public decimal MinimumRelevantFluctuation { get; }
+
+    /// <summary>
+    /// Flag to indicate if the alert is in the threshold value or on the allowed fluctuation range.
+    /// </summary>
+    public bool IsAlertOn { get; protected set; }
+
+    protected decimal PreviousTemperature;
+
+    protected readonly Action Alert;
+
+    protected AlertBase(string alertName, decimal thresholdTemperature, decimal minimumRelevantFluctuation,Action alert)
     {
-        /// <summary>
-        /// The name of the alert to identifiy it.
-        /// </summary>
-        public string Name { get; set; }
+        Name = alertName ?? throw new ArgumentNullException(nameof(alertName));
+        ThresholdTemperature = thresholdTemperature;
+        MinimumRelevantFluctuation = minimumRelevantFluctuation;
+        IsAlertOn = false;
+        Alert = alert;
+    }
 
-        /// <summary>
-        /// The threshold value of the alert.
-        /// </summary>
-        public decimal ThresholdTemperature { get; }
+    public  void HandleTemperatureChanged(object sender, TemperatureChangedEventArgs e)
+    {
+        Check(e.Temperature.Value);
+    }
 
-        /// <summary>
-        /// The minimum fluctuation considered relevent for alert.
-        /// </summary>
-        public decimal MinimumReleventFluctuation { get; }
-
-        /// <summary>
-        /// Flag to indicate if the alert is in the threshold value or on the allowed fluctuation range.
-        /// </summary>
-        public bool IsAlertOn { get; protected set; }
-
-        protected decimal previousTemperature;
-
-        protected Action Alert;
-
-        protected AlertBase(string alertName, decimal thresholdTemperature, decimal minimumReleventFluctuation,Action alert)
-        {
-            if (alertName == null)
-                throw new ArgumentNullException(nameof(alertName));
-
-            Name = alertName;
-            ThresholdTemperature = thresholdTemperature;
-            MinimumReleventFluctuation = minimumReleventFluctuation;
-            IsAlertOn = false;
-            Alert = alert;
-        }
-
-        public  void HandleTemperatureChanged(object sender, TemperatureChangedEventArgs e)
-        {
-            Check(e.Temperature.Value);
-        }
-
-        public virtual void Check(decimal tempererature)
-        {
-        }
+    public virtual void Check(decimal temperature)
+    {
     }
 }

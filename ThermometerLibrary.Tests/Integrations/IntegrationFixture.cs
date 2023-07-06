@@ -5,7 +5,7 @@ using Xunit;
 
 namespace ThermometerLibrary.Tests.Integrations
 {
-    public class IntegreationFixture
+    public class IntegrationFixture
     {
         private int numberOfAlert1;
         private int numberOfAlert2;
@@ -13,7 +13,7 @@ namespace ThermometerLibrary.Tests.Integrations
 
         private IThermometer thermometer;
 
-        public IntegreationFixture()
+        public IntegrationFixture()
         {
             var converter = new TemperatureConverter(new ConverterFactory(new List<IUnitConverter> { new CelsiusConverter(), new FahrenheitConverter() }));
 

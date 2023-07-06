@@ -16,7 +16,8 @@ namespace ThermometerLibrary
         {
             if (Temperature.Unit != temperature.Unit && Converter == null)
             {
-                throw new MemberAccessException(string.Format("There is no converters with this thermometer. A {0} unit was recieved but the thermometer is set to {1} unit.",temperature.Unit,ThermometerUnit));
+                throw new MemberAccessException(
+                    $"There is no converters with this thermometer. A {temperature.Unit} unit was recieved but the thermometer is set to {ThermometerUnit} unit.");
             }
 
             var temp = temperature.Unit != ThermometerUnit

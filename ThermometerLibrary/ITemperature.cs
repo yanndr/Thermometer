@@ -1,8 +1,7 @@
-namespace ThermometerLibrary
+namespace ThermometerLibrary;
+
+public interface ITemperature
 {
-    public interface ITemperature
-    {
-        decimal Value {get; set;}
-        Unit Unit {get;}
-    }
+    decimal Value {get; set;}
+    Unit Unit {get;}
 }

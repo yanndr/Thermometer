@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Grpc.Core;
@@ -8,40 +7,39 @@ using ThermometerService.Pb;
 using Thermometer = ThermometerService.Pb.Thermometer;
 using Unit = ThermometerService.Pb.Unit;
 
-namespace TemperatureUpdater
+namespace TemperatureUpdater;
+
+internal static class Program
 {
-    class Program
+    private static void Main()
     {
-        static void Main(string[] args)
+        var channel = new Channel("127.0.0.1:50051", ChannelCredentials.Insecure);
+
+        var client = new Thermometer.ThermometerClient(channel);
+
+        var cancel = false;
+        var task = Task.Factory.StartNew(() =>
         {
-            var channel = new Channel("127.0.0.1:50051", ChannelCredentials.Insecure);
+            const double minValue = -10.0;
+            const double maxValue = 110.0;
 
-            var client = new Thermometer.ThermometerClient(channel);
-
-            var cancel = false;
-            var task = Task.Factory.StartNew(() =>
+            while (!cancel)
             {
-                const double minValue = -10.0;
-                const double maxValue = 110.0;
+                var rnd = new Random();
+                var value = rnd.NextDouble() * (maxValue - minValue) + minValue;
+                var temp = new Temperature((decimal) value, ThermometerLibrary.Unit.Celsius);
+                client.UpdateTemperature(
+                    new UpdateTemperatureRequest {Value = (double) temp.Value, Init = Unit.Celsius});
+                Thread.Sleep(2000);
+            }
+        });
+        
+        Console.WriteLine("Press any key to exit...");
+        Console.ReadKey();
+        cancel = true;
+        task.Wait();
 
-                while (!cancel)
-                {
-                    var rnd = new Random();
-                    var value = rnd.NextDouble() * (maxValue - minValue) + minValue;
-                    var temp = new Temperature((decimal) value, ThermometerLibrary.Unit.Celsius);
-                    client.UpdateTemperature(
-                        new UpdateTemperatureRequest {Value = (double) temp.Value, Init = Unit.Celsius});
-                    Thread.Sleep(2000);
-                }
-            });
-            
-            Console.WriteLine("Press any key to exit...");
-            Console.ReadKey();
-            cancel = true;
-            task.Wait();
-
-            channel.ShutdownAsync().Wait();
-        }
-
+        channel.ShutdownAsync().Wait();
     }
+
 }

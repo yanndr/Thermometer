@@ -1,38 +1,37 @@
 ﻿
 using System;
 
-namespace ThermometerLibrary.Alerters
+namespace ThermometerLibrary.Alerters;
+
+/// <summary>
+/// Represents an alert issued only when the threshold is reached when the temperature is rising.
+/// </summary>
+public class RaiseAlert : AlertBase, IAlerter
 {
-    /// <summary>
-    /// Represents an alert issued only when the threshold is reached when the temperature is rising.
-    /// </summary>
-    public class RaiseAlert : AlertBase, IAlerter
+    public RaiseAlert(string alertName, decimal thresholdTemperature, decimal minimumRelevantFluctuation,Action action)
+        : base(alertName, thresholdTemperature, minimumRelevantFluctuation, action) { }
+
+    public override void Check(decimal temperature)
     {
-        public RaiseAlert(string alertName, decimal thresholdTemperature, decimal minimumReleventFluctuation,Action action)
-            : base(alertName, thresholdTemperature, minimumReleventFluctuation, action) { }
+        var fluctuation = temperature - PreviousTemperature;
+        PreviousTemperature = temperature;
 
-        public override void Check(decimal temperature)
+        if (temperature < ThresholdTemperature)
         {
-            var fluctuation = temperature - previousTemperature;
-            previousTemperature = temperature;
-
-            if (temperature < ThresholdTemperature)
-            {
-                if (!IsAlertOn)
-                    return;
-                if (ThresholdTemperature - MinimumReleventFluctuation > temperature)
-                    IsAlertOn = false;
+            if (!IsAlertOn)
                 return;
-            }
-
-            if (IsAlertOn)
-                return;
-
-            if (fluctuation <= 0)
-                return;
-
-            IsAlertOn = true;
-            Alert();
+            if (ThresholdTemperature - MinimumRelevantFluctuation > temperature)
+                IsAlertOn = false;
+            return;
         }
+
+        if (IsAlertOn)
+            return;
+
+        if (fluctuation <= 0)
+            return;
+
+        IsAlertOn = true;
+        Alert();
     }
 }

@@ -1,9 +1,8 @@
-﻿namespace ThermometerLibrary.Alerters
+﻿namespace ThermometerLibrary.Alerters;
+
+public interface IAlerter
 {
-    public interface IAlerter
-    {
-        string Name { get; set; }
-        void Check(decimal tempererature);
-        void HandleTemperatureChanged(object sender, TemperatureChangedEventArgs e);
-    }
+    string Name { get; set; }
+    void Check(decimal temperature);
+    void HandleTemperatureChanged(object sender, TemperatureChangedEventArgs e);
 }

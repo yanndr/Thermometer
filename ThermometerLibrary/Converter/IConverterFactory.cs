@@ -1,10 +1,9 @@
 using System.Collections.Generic;
 
-namespace ThermometerLibrary.Converter
+namespace ThermometerLibrary.Converter;
+
+public interface IConverterFactory
 {
-    public interface IConverterFactory
-    {
-        ICollection<IUnitConverter> Converters {get;}
-        IUnitConverter GetConverter(Unit unit);
-    }
+    ICollection<IUnitConverter> Converters {get;}
+    IUnitConverter GetConverter(Unit unit);
 }

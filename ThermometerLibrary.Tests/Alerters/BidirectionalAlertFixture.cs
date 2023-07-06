@@ -21,7 +21,7 @@ namespace ThermometerLibrary.Tests.Alerters
         {
             Assert.Equal(alertName, bidirectionalAlert.Name);
             Assert.Equal(10.0M, bidirectionalAlert.ThresholdTemperature);
-            Assert.Equal(0.5M, bidirectionalAlert.MinimumReleventFluctuation);
+            Assert.Equal(0.5M, bidirectionalAlert.MinimumRelevantFluctuation);
             Assert.Equal(false, bidirectionalAlert.IsAlertOn);
         }
 

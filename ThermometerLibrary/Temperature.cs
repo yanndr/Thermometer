@@ -1,50 +1,51 @@
 using System;
 
-namespace ThermometerLibrary
+namespace ThermometerLibrary;
+
+public class Temperature : ITemperature
 {
-    public class Temperature :ITemperature
+    public decimal Value { get; set; }
+    public Unit Unit { get; set; }
+
+    public Temperature(decimal value, Unit unit)
     {
-        public  decimal Value {get; set;}
-        public Unit Unit {get; set;}
+        Value = value;
+        Unit = unit;
+    }
 
-        public Temperature(decimal value,Unit unit){
-            Value = value;
-            Unit = unit;
-        }
+    public override string ToString()
+    {
+        return $"{Math.Round(Value, 2)}°{((char)Unit).ToString()}";
+    }
 
-        public override string ToString(){
-            return string.Format("{0}°{1}",Math.Round(Value,2),((char)Unit).ToString());
-        } 
-
-        public static bool operator ==(Temperature a, Temperature b)
+    public static bool operator ==(Temperature a, Temperature b)
+    {
+        if (ReferenceEquals(a, b))
         {
-            if (ReferenceEquals(a, b))
-            {
-                return true;
-            }
-
-            if ((object)a == null || (object)b == null)
-            {
-                return false;
-            }
-
-            return a.Value == b.Value && a.Unit == b.Unit;
+            return true;
         }
 
-        public static bool operator !=(Temperature a, Temperature b)
+        if ((object)a == null || (object)b == null)
         {
-            return !(a == b);
+            return false;
         }
 
-        public override bool Equals(System.Object obj)
-        {
-            var p = obj as Temperature;
-            return (object)p != null && base.Equals(obj);
-        }
+        return a.Value == b.Value && a.Unit == b.Unit;
+    }
 
-        public override int GetHashCode()
-        {
-            return base.GetHashCode();
-        }
+    public static bool operator !=(Temperature a, Temperature b)
+    {
+        return !(a == b);
+    }
+
+    public override bool Equals(System.Object obj)
+    {
+        var p = obj as Temperature;
+        return (object)p != null && base.Equals(obj);
+    }
+
+    public override int GetHashCode()
+    {
+        return base.GetHashCode();
     }
 }
